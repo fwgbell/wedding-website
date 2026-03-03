@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frederick &amp; Flora · Wedding</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="index.html" class="site-header__brand">
+          <span class="site-header__names">Frederick &amp; Flora</span>
+          <span class="site-header__date">Wedding · 19 September 2026</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+        </button>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul class="site-nav__list">
+            <li><a href="details.html">Wedding Details</a></li>
+            <li><a href="garden-party.html">Garden Party</a></li>
+            <li><a href="travel-stay.html">Travel &amp; Stay</a></li>
+            <li><a href="rsvp.html">RSVP</a></li>
+            <li><a href="registry.html">Registry</a></li>
+            <li><a href="faq-contact.html">FAQ &amp; Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero__image">
+          <!-- Replace this with your own photo in assets/img/hero.jpg -->
+        </div>
+        <div class="container hero__content">
+          <p class="hero__eyebrow">We are getting married!!</p>
+          <h1 class="hero__title">Frederick &amp; Flora</h1>
+          <p class="hero__subtitle">19 September 2026 · 1:00pm · The Grange, Hampshire</p>
+          <a href="rsvp.html" class="btn btn--primary">RSVP</a>
+        </div>
+      </section>
+
+      <section class="section section--light">
+        <div class="container">
+          <header class="section__header">
+            <h2 class="section__title">Countdown to our wedding</h2>
+            <p class="section__lead">
+              We can’t wait to celebrate with you. <br/> Here’s how long is left until
+              the big day.
+            </p>
+          </header>
+
+          <div id="countdown" class="countdown" data-countdown-root>
+            <!-- The individual number boxes are filled by JavaScript.
+                 You can safely adjust the labels and styling in CSS. -->
+            <div class="countdown__item">
+              <span class="countdown__number" data-countdown-days>0</span>
+              <span class="countdown__label">Days</span>
+            </div>
+            <div class="countdown__item">
+              <span class="countdown__number" data-countdown-hours>0</span>
+              <span class="countdown__label">Hours</span>
+            </div>
+            <div class="countdown__item">
+              <span class="countdown__number" data-countdown-minutes>0</span>
+              <span class="countdown__label">Minutes</span>
+            </div>
+            <div class="countdown__item">
+              <span class="countdown__number" data-countdown-seconds>0</span>
+              <span class="countdown__label">Seconds</span>
+            </div>
+            <p class="countdown__message" data-countdown-message></p>
+          </div>
+
+          <!-- <p class="section__note">
+            To change the wedding date/time used for the countdown, edit the
+            <code>weddingConfig.date</code> value in <code>assets/js/main.js</code>.
+          </p> -->
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container section__grid">
+          <article class="card card--link">
+            <h3 class="card__title">Wedding Day Details</h3>
+            <p class="card__body">
+              Ceremony &amp; reception schedule, addresses, dress code, and
+              everything else you need to know for the day.
+            </p>
+            <a href="details.html" class="card__link">View details</a>
+          </article>
+
+          <article class="card card--link">
+            <h3 class="card__title">Happy Ever After Garden Party</h3>
+            <p class="card__body">
+              Details for our Sunday garden party celebration.
+            </p>
+            <a href="garden-party.html" class="card__link">View details</a>
+          </article>
+
+          <article class="card card--link">
+            <h3 class="card__title">Travel &amp; Stay</h3>
+            <p class="card__body">
+              Recommended hotels, and local tips to help you plan your trip.
+            </p>
+            <a href="travel-stay.html" class="card__link">Plan your trip</a>
+          </article>
+
+          <article class="card card--link">
+            <h3 class="card__title">RSVP</h3>
+            <p class="card__body">
+              Let us know if you’ll be joining us, who you’re bringing, and any
+              dietary needs.
+            </p>
+            <a href="rsvp.html" class="card__link">RSVP online</a>
+          </article>
+
+          <article class="card card--link">
+            <h3 class="card__title">Registry</h3>
+            <p class="card__body">
+              Your presence is more than enough, but if you’d like to give a
+              gift you can find our registry here.
+            </p>
+            <a href="registry.html" class="card__link">View registry</a>
+          </article>
+
+          <article class="card card--link">
+            <h3 class="card__title">FAQ &amp; Contact</h3>
+            <p class="card__body">
+              Answers to common questions and how to reach us if you need
+              anything else.
+            </p>
+            <a href="faq-contact.html" class="card__link">See FAQ</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__text">
+          &copy; <span id="footer-year"></span> Frederick &amp; Flora
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/js/guest-list.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
+

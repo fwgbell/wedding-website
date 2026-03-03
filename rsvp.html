@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSVP · Frederick &amp; Flora</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="index.html" class="site-header__brand">
+          <span class="site-header__names">Frederick &amp; Flora</span>
+          <span class="site-header__date">Wedding · 19 September 2026</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+        </button>
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul class="site-nav__list">
+            <li><a href="details.html">Wedding Details</a></li>
+            <li><a href="garden-party.html">Garden Party</a></li>
+            <li><a href="travel-stay.html">Travel &amp; Stay</a></li>
+            <li><a href="rsvp.html" aria-current="page">RSVP</a></li>
+            <li><a href="registry.html">Registry</a></li>
+            <li><a href="faq-contact.html">FAQ &amp; Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <h1 class="page-hero__title">RSVP</h1>
+          <p class="page-hero__lead">
+            We are so excited to celebrate with you. Please let us know if you
+            can join us.
+          </p>
+          <p class="muted">
+            <!-- Replace with your real deadline. -->
+            Kindly respond by <strong>May 19th, 2026</strong>.
+          </p>
+          <p
+              id="rsvp-status"
+              class="form__status"
+              aria-live="polite"
+            ></p>
+        </div>
+      </section>
+
+      <!-- <section class="section section--light">
+        <div class="container">
+          <p>
+            This form is designed to submit directly to a Google Sheet. You will need to:
+          </p>
+          <ol>
+            <li>
+              Create a Google Apps Script web app that writes to your sheet.
+            </li>
+            <li>
+              Paste the web app URL into <code>rsvpSheetConfig.webAppUrl</code> in
+              <code>assets/js/main.js</code>.
+            </li>
+          </ol>
+        </div>
+      </section> -->
+
+      <section class="section">
+        <div class="container">
+          <form
+            id="rsvp-form"
+            class="form"
+            method="POST"
+            action="#"
+            target="_self"
+            novalidate
+          >
+            <!-- IMPORTANT:
+                 - Submission is handled by JavaScript and sent to your Google Sheet via Apps Script.
+            -->
+
+            <div class="form__group">
+              <label>Your name</label>
+              <p id="rsvp-current-guest" class="form__input" style="margin: 0; padding: 0.75rem 1rem;"></p>
+              <input type="hidden" id="rsvp-guest-name" name="entry.111111" required />
+              <p class="form__hint" style="margin-top: 0.5rem; font-size: 0.85rem;">
+                <a href="#" id="rsvp-relogin">Not you? Click here to log in again</a>
+              </p>
+            </div>
+
+            <div class="form__group">
+              <label for="rsvp-notes">Anything else we should know?</label>
+              <textarea
+                id="rsvp-notes"
+                name="entry.777777"
+                rows="3"
+                placeholder="Any other message you'd like to send to the bride and groom."
+              ></textarea>
+            </div>
+
+            <div class="form__actions">
+              <button type="submit" class="btn btn--primary">Submit RSVP</button>
+              <p id="rsvp-status-inline" class="form__status" aria-live="polite"></p>
+              <!-- <p class="form__hint">
+                After you submit, you may see a confirmation page from Google
+                Forms.
+              </p> -->
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__text">
+          &copy; <span id="footer-year"></span> Frederick &amp; Flora
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/js/guest-list.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
+
