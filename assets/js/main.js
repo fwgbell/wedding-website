@@ -236,7 +236,7 @@ function setupRsvpGuestAttendanceUI() {
       mealGroup.setAttribute("data-rsvp-section", "weddingMeal");
       mealGroup.style.display = showWeddingDay ? "" : "none";
       const mealLabel = document.createElement("label");
-      mealLabel.textContent = "Meal preference (if applicable)";
+      mealLabel.textContent = "Meal preference";
       const mealSelect = document.createElement("select");
       mealSelect.className = "form__input";
       mealSelect.name = `rsvpGuests[${index}][meal]`;
