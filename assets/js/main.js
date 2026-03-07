@@ -1247,13 +1247,23 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
 
   function filterGuests(query) {
     const q = query.toLowerCase().trim();
-    if (q === "") {
-      filteredGuests = [...guestsWithMatchingAccess];
-    } else {
-      filteredGuests = guestsWithMatchingAccess.filter((guest) =>
-        guest.name.toLowerCase().includes(q)
-      );
+    if (q.length < 3) {
+      dropdown.classList.remove("is-open");
+      return;
     }
+    filteredGuests = guestsWithMatchingAccess
+      .filter((guest) => guest.name.toLowerCase().includes(q))
+      .sort((a, b) => {
+        const aLower = a.name.toLowerCase();
+        const bLower = b.name.toLowerCase();
+        const aStarts = aLower.startsWith(q) ? 0 : 1;
+        const bStarts = bLower.startsWith(q) ? 0 : 1;
+        if (aStarts !== bStarts) return aStarts - bStarts;
+        const aIdx = aLower.indexOf(q);
+        const bIdx = bLower.indexOf(q);
+        return aIdx - bIdx || aLower.localeCompare(bLower);
+      })
+      .slice(0, 4);
     renderDropdown(filteredGuests);
   }
 
@@ -1262,7 +1272,8 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
   });
 
   guestSelectInput.addEventListener("focus", () => {
-    if (filteredGuests.length > 0) {
+    const query = guestSelectInput.value.trim();
+    if (query.length >= 3 && filteredGuests.length > 0) {
       dropdown.classList.add("is-open");
     }
   });
@@ -1273,9 +1284,6 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
       dropdown.classList.remove("is-open");
     }
   });
-
-  // Initial render
-  renderDropdown(filteredGuests);
 }
 
 function selectGuest(guestName, access, modal, resolve) {
