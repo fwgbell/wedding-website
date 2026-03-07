@@ -135,7 +135,8 @@ function setupRsvpGuestAttendanceUI() {
   groupRoot.className = "form__group";
   groupRoot.id = "rsvp-guest-attendance";
 
-  const label = document.createElement("label");
+  const label = document.createElement("p");
+  label.className = "form__section-heading";
   label.textContent = "RSVP details";
   groupRoot.appendChild(label);
 
@@ -430,8 +431,24 @@ function setupNavToggle() {
 
   if (!toggle || !nav) return;
 
+  function setOpen(open) {
+    nav.classList.toggle("is-open", open);
+    toggle.classList.toggle("is-active", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
   toggle.addEventListener("click", () => {
-    nav.classList.toggle("is-open");
+    setOpen(!nav.classList.contains("is-open"));
+  });
+
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) {
+      setOpen(false);
+    }
   });
 }
 
@@ -760,7 +777,7 @@ function setupRsvpSheetIntegration() {
       [statusEl, statusInlineEl].filter(Boolean).forEach((el) => {
         el.classList.remove("form__status--success");
         el.classList.remove("form__status--error");
-        el.textContent = "Checking your RSVP…";
+        el.textContent = "Loading your RSVP details, please wait…";
       });
     }
 
@@ -790,8 +807,7 @@ function setupRsvpSheetIntegration() {
           }
           showRsvpSummarySafe(payload);
         } else {
-          // Server says no RSVP — clear stale cache and show the form.
-          clearCachedRsvp();
+          // Server confirms no RSVP yet — already cached above, so just show the form.
           showRsvpForm();
         }
       })
@@ -1079,6 +1095,7 @@ async function setupPasswordProtection() {
   // Show password modal
   return new Promise((resolve) => {
     const modal = createPasswordModal();
+    document.body.classList.add("modal-open");
     document.body.appendChild(modal);
     
     const passwordInput = modal.querySelector("#password-input");
@@ -1275,7 +1292,8 @@ function selectGuest(guestName, access, modal, resolve) {
   // Pre-fetch RSVP data in the background so the RSVP page loads instantly
   prefetchRsvpData(guestName);
 
-  // Remove modal
+  // Remove modal and restore body scroll
+  document.body.classList.remove("modal-open");
   modal.remove();
 
   // Resolve promise to continue page setup

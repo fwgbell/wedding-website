@@ -14,7 +14,8 @@
           <span class="site-header__names">Frederick &amp; Flora</span>
           <span class="site-header__date">Wedding · 19 September 2026</span>
         </a>
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="nav-toggle__line"></span>
           <span class="nav-toggle__line"></span>
           <span class="nav-toggle__line"></span>
         </button>
@@ -68,13 +69,13 @@
         </div>
       </section> -->
 
-      <section class="section">
+      <section class="section RSVP-section">
         <div class="container">
+          <div class="form-body">
           <div class="form__group">
-            <label>Your name</label>
-            <p id="rsvp-current-guest" class="form__input" style="margin: 0; padding: 0.75rem 1rem;"></p>
+            <p id="rsvp-current-guest" class="rsvp-guest-display"></p>
             <input type="hidden" id="rsvp-guest-name" name="entry.111111" required />
-            <p class="form__hint" style="margin-top: 0.5rem; font-size: 0.85rem;">
+            <p class="form__hint" style="margin-top: 0.4rem;">
               <a href="#" id="rsvp-relogin">Not you? Click here to log in again</a>
             </p>
           </div>
@@ -111,6 +112,7 @@
               </p> -->
             </div>
           </form>
+          </div>
         </div>
       </section>
     </main>

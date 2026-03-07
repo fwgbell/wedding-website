@@ -2,7 +2,7 @@
 
 This is a simple, static wedding website built with **plain HTML, CSS, and a little JavaScript**. It is designed to be easy to customize and host on **GitHub Pages**.
 
-You can change all of the text, images, and colors without any build tools. SCSS files are included if you want to use them, but you do not have to.
+You can change all of the text, images, and colors without any build tools.
 
 ---
 
@@ -23,7 +23,6 @@ Shared assets:
 - `assets/css/main.css`: The CSS file all pages use.
 - `assets/js/main.js`: Shared JavaScript (navigation toggle, countdown, RSVP validation, FAQ accordion).
 - `assets/img/`: Put your own images here (hero photo, venue photos, etc.).
-- `scss/`: Optional SCSS source files if you want to edit styles that way.
 
 ---
 
@@ -192,43 +191,9 @@ You can remove or adjust this logic inside the `setupRsvpForm()` function if you
 
 ---
 
-## Editing styles (with or without SCSS)
+## Editing styles
 
-### Option A: Just edit `assets/css/main.css`
-
-If you want the simplest possible setup:
-
-1. Open `assets/css/main.css`.
-2. Edit colors, fonts, spacing, etc. directly in that file.
-
-You never have to touch the SCSS files.
-
-### Option B: Use SCSS and recompile
-
-If you are comfortable with SCSS, there are three main files in `scss/`:
-
-- `_variables.scss`: Colors, fonts, spacing, and breakpoints.
-- `_layout.scss`: Global layout (containers, header, footer, hero, sections).
-- `_components.scss`: Buttons, cards, countdown, forms, FAQ, etc.
-- `main.scss`: Entry file that imports the three above.
-
-To compile SCSS into CSS you have two easy choices:
-
-#### 1. Use a local Sass CLI (if you have Node or Sass installed)
-
-From the project folder:
-
-```bash
-sass scss/main.scss assets/css/main.css
-```
-
-Run that again any time you change the SCSS.
-
-#### 2. Use an online SCSS to CSS tool
-
-1. Open `scss/main.scss` and copy its contents (it will pull in the partials).
-2. Paste into an online SCSS → CSS converter.
-3. Copy the output CSS and paste it into `assets/css/main.css`.
+Edit `assets/css/main.css` to change colors, fonts, spacing, and layout. All pages use this single CSS file, so your changes apply across the site.
 
 ---
 
