@@ -21,6 +21,7 @@ In your spreadsheet, create (or rename) a tab called `RSVPs` and add these heade
 - `Attending garden party`
 - `Meal`
 - `Dietary`
+- `Coach`
 - `Notes`
 
 Notes:
@@ -70,6 +71,7 @@ function doGet(e) {
     var attendingGardenColIndex = findHeaderIndex_(values[0], "Attending garden party");
     var mealColIndex = findHeaderIndex_(values[0], "Meal");
     var dietaryColIndex = findHeaderIndex_(values[0], "Dietary");
+    var coachColIndex = findHeaderIndex_(values[0], "Coach");
     var notesColIndex = findHeaderIndex_(values[0], "Notes");
 
     if (guestColIndex === -1) {
@@ -100,6 +102,7 @@ function doGet(e) {
         attendingGarden: attendingGardenColIndex === -1 ? "" : String(values[i][attendingGardenColIndex] || ""),
         meal: mealColIndex === -1 ? "" : String(values[i][mealColIndex] || ""),
         dietary: dietaryColIndex === -1 ? "" : String(values[i][dietaryColIndex] || ""),
+        coach: coachColIndex === -1 ? "" : String(values[i][coachColIndex] || ""),
         notes: notesColIndex === -1 ? "" : String(values[i][notesColIndex] || ""),
       });
     }
@@ -134,7 +137,7 @@ function doPost(e) {
     // Expected keys from the website (see assets/js/main.js):
     // - guest (optional, will be set if user is authenticated)
     // - entry.111111 (guest select) / entry.222222 (email) / entry.555555 (meal) ...
-    // - rsvpGuests: [{ name: "Guest Name", email: "", attendingWedding: "yes"|"no"|"", attendingGarden: "yes"|"no"|"", meal: "", dietary: "" }, ...]
+    // - rsvpGuests: [{ name: "Guest Name", email: "", attendingWedding: "yes"|"no"|"", attendingGarden: "yes"|"no"|"", meal: "", dietary: "", coach: "yes"|"no"|"" }, ...]
     var primaryGuest = String(data.guest || data["entry.111111"] || "").trim();
     var notes = String(data["entry.777777"] || "").trim();
 
@@ -165,6 +168,7 @@ function doPost(e) {
       var attendingGarden = String(g.attendingGarden || "").trim();
       var meal = String(g.meal || "").trim();
       var dietary = String(g.dietary || "").trim();
+      var coach = String(g.coach || "").trim();
 
       sheet.appendRow([
         new Date(),
@@ -174,6 +178,7 @@ function doPost(e) {
         attendingGarden,
         meal,
         dietary,
+        coach,
         notes,
       ]);
     }

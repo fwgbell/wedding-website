@@ -70,6 +70,15 @@
 
       <section class="section">
         <div class="container">
+          <div class="form__group">
+            <label>Your name</label>
+            <p id="rsvp-current-guest" class="form__input" style="margin: 0; padding: 0.75rem 1rem;"></p>
+            <input type="hidden" id="rsvp-guest-name" name="entry.111111" required />
+            <p class="form__hint" style="margin-top: 0.5rem; font-size: 0.85rem;">
+              <a href="#" id="rsvp-relogin">Not you? Click here to log in again</a>
+            </p>
+          </div>
+
           <form
             id="rsvp-form"
             class="form"
@@ -83,15 +92,6 @@
             -->
 
             <div class="form__group">
-              <label>Your name</label>
-              <p id="rsvp-current-guest" class="form__input" style="margin: 0; padding: 0.75rem 1rem;"></p>
-              <input type="hidden" id="rsvp-guest-name" name="entry.111111" required />
-              <p class="form__hint" style="margin-top: 0.5rem; font-size: 0.85rem;">
-                <a href="#" id="rsvp-relogin">Not you? Click here to log in again</a>
-              </p>
-            </div>
-
-            <div class="form__group">
               <label for="rsvp-notes">Anything else we should know?</label>
               <textarea
                 id="rsvp-notes"
@@ -102,7 +102,8 @@
             </div>
 
             <div class="form__actions">
-              <button type="submit" class="btn btn--primary">Submit RSVP</button>
+              <button type="submit" class="btn btn--primary" disabled>Submit RSVP</button>
+              <p id="rsvp-submit-hint" class="form__hint" aria-live="polite"></p>
               <p id="rsvp-status-inline" class="form__status" aria-live="polite"></p>
               <!-- <p class="form__hint">
                 After you submit, you may see a confirmation page from Google

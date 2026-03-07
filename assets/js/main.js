@@ -55,6 +55,8 @@ function applyRsvpDataToGuestSections(form, rsvpGuests) {
     if (attendingGardenSelect) attendingGardenSelect.value = String(row.attendingGarden || "");
     const mealSelect = card.querySelector("[data-rsvp-field='meal']");
     if (mealSelect) mealSelect.value = String(row.meal || "");
+    const coachSelect = card.querySelector("[data-rsvp-field='coach']");
+    if (coachSelect) coachSelect.value = String(row.coach || "");
     const dietaryTextarea = card.querySelector("[data-rsvp-field='dietary']");
     if (dietaryTextarea) dietaryTextarea.value = String(row.dietary || "");
   });
@@ -83,7 +85,7 @@ function setupRsvpGuestAttendanceUI() {
   const form = document.getElementById("rsvp-form");
   if (!form) return;
 
-  const guestSelect = form.querySelector("#rsvp-guest-name");
+  const guestSelect = document.querySelector("#rsvp-guest-name");
   if (!guestSelect) return;
 
   const existing = document.getElementById("rsvp-guest-attendance");
@@ -101,13 +103,11 @@ function setupRsvpGuestAttendanceUI() {
   rowsRoot.id = "rsvp-guest-attendance-rows";
   groupRoot.appendChild(rowsRoot);
 
-  // Insert right after the name select group.
-  const nameGroup = guestSelect.closest(".form__group");
-  if (nameGroup && nameGroup.parentElement) {
-    nameGroup.parentElement.insertBefore(groupRoot, nameGroup.nextSibling);
-  } else {
-    form.insertBefore(groupRoot, form.firstChild);
-  }
+  rowsRoot.addEventListener("change", updateSubmitButtonState);
+  rowsRoot.addEventListener("input", updateSubmitButtonState);
+
+  // Insert at the beginning of the form since name group is now outside
+  form.insertBefore(groupRoot, form.firstChild);
 
   function renderRows() {
     rowsRoot.innerHTML = "";
@@ -115,6 +115,7 @@ function setupRsvpGuestAttendanceUI() {
     const selectedName = String(guestSelect.value || "").trim();
     if (!selectedName) {
       groupRoot.style.display = "none";
+      updateSubmitButtonState();
       return;
     }
 
@@ -123,6 +124,7 @@ function setupRsvpGuestAttendanceUI() {
 
     if (members.length === 0) {
       groupRoot.style.display = "none";
+      updateSubmitButtonState();
       return;
     }
 
@@ -264,6 +266,40 @@ function setupRsvpGuestAttendanceUI() {
       mealGroup.appendChild(mealSelect);
       inner.appendChild(mealGroup);
 
+      const coachGroup = document.createElement("div");
+      coachGroup.className = "form__group";
+      coachGroup.setAttribute("data-rsvp-section", "weddingCoach");
+      coachGroup.style.display = "none";
+      const coachHint = document.createElement("p");
+      coachHint.className = "form__hint";
+      coachHint.style.marginTop = "0";
+      coachHint.style.marginBottom = "0.75rem";
+      coachHint.textContent = "We are considering booking a coach from the centre of Winchester to the ceremony on the morning of the wedding, and a return coach from the reception back to Winchester at midnight. Let us know if you'd be interested so we can gauge numbers.";
+      const coachLabel = document.createElement("label");
+      coachLabel.textContent = "Interested in the coach service?";
+      const coachSelect = document.createElement("select");
+      coachSelect.className = "form__input";
+      coachSelect.name = `rsvpGuests[${index}][coach]`;
+      coachSelect.setAttribute("data-rsvp-field", "coach");
+
+      const coachBlank = document.createElement("option");
+      coachBlank.value = "";
+      coachBlank.textContent = "Please select";
+      const coachYes = document.createElement("option");
+      coachYes.value = "yes";
+      coachYes.textContent = "Yes, I'd be interested";
+      const coachNo = document.createElement("option");
+      coachNo.value = "no";
+      coachNo.textContent = "No, I'll make my own way";
+
+      coachSelect.appendChild(coachBlank);
+      coachSelect.appendChild(coachYes);
+      coachSelect.appendChild(coachNo);
+
+      coachGroup.appendChild(coachHint);
+      coachGroup.appendChild(coachLabel);
+      coachGroup.appendChild(coachSelect);
+
       const dietGroup = document.createElement("div");
       dietGroup.className = "form__group";
       dietGroup.setAttribute("data-rsvp-section", "weddingDietary");
@@ -279,6 +315,7 @@ function setupRsvpGuestAttendanceUI() {
       dietGroup.appendChild(dietLabel);
       dietGroup.appendChild(dietTextarea);
       inner.appendChild(dietGroup);
+      inner.appendChild(coachGroup);
 
       function updateWeddingSectionsVisibility() {
         const attendingWedding = String(attendingWeddingSelect.value || "").trim();
@@ -291,12 +328,21 @@ function setupRsvpGuestAttendanceUI() {
           mealSelect.value = "";
         }
 
+        // Coach service: only relevant for Wedding Day attendees.
+        const showCoach = showWeddingDay && attendingWedding === "yes";
+        coachGroup.style.display = showCoach ? "" : "none";
+        if (!showCoach) {
+          coachSelect.value = "";
+        }
+
         // Dietary requirements: relevant for anyone attending either day.
         const showDietary = attendingWedding === "yes" || attendingGarden === "yes";
         dietGroup.style.display = showDietary ? "" : "none";
         if (!showDietary) {
           dietTextarea.value = "";
         }
+
+        updateSubmitButtonState();
       }
 
       attendingWeddingSelect.addEventListener("change", updateWeddingSectionsVisibility);
@@ -305,6 +351,8 @@ function setupRsvpGuestAttendanceUI() {
 
       rowsRoot.appendChild(card);
     });
+
+    updateSubmitButtonState();
   }
 
   guestSelect.addEventListener("change", renderRows);
@@ -495,6 +543,7 @@ function setupRsvpForm() {
       messages.push("Please select your name so we can load your group RSVP details.");
     }
 
+    // Validate email for each guest (always required)
     const guestEmailInputs = Array.from(form.querySelectorAll("#rsvp-guest-attendance-rows input[type='email'][name^='rsvpGuests']"));
     guestEmailInputs.forEach((input) => {
       if (!input.value.trim()) {
@@ -510,21 +559,53 @@ function setupRsvpForm() {
       messages.push("Please enter valid email addresses for each guest.");
     }
 
+    // Validate garden party attendance (always required)
     const attendingGardenSelects = Array.from(
       form.querySelectorAll("#rsvp-guest-attendance-rows select[name$='[attendingGarden]']")
     );
+    console.log("Garden selects:", attendingGardenSelects.map(s => ({ value: s.value, text: s.options[s.selectedIndex]?.text })));
     if (attendingGardenSelects.some((s) => !String(s.value || "").trim())) {
       hasError = true;
       messages.push("Please select attending or not attending for the garden party for each guest.");
     }
 
+    // Validate wedding day attendance (only required if visible)
     const weddingAttendanceSelects = Array.from(
       form.querySelectorAll("#rsvp-guest-attendance-rows select[name$='[attendingWedding]']")
     ).filter((s) => s && s.offsetParent !== null);
+    console.log("Wedding selects:", weddingAttendanceSelects.map(s => ({ value: s.value, text: s.options[s.selectedIndex]?.text, visible: s.offsetParent !== null })));
     if (weddingAttendanceSelects.some((s) => !String(s.value || "").trim())) {
       hasError = true;
       messages.push("Please select attending or not attending for the wedding day for each guest.");
     }
+
+    // Validate meal preference (only required if visible and guest is attending wedding)
+    const mealSelects = Array.from(
+      form.querySelectorAll("#rsvp-guest-attendance-rows select[name$='[meal]']")
+    ).filter((s) => s && s.offsetParent !== null);
+    console.log("Meal selects:", mealSelects.map(s => ({ value: s.value, text: s.options[s.selectedIndex]?.text, visible: s.offsetParent !== null })));
+    
+    // Check if any meal select is visible and needs validation
+    mealSelects.forEach((mealSelect) => {
+      const card = mealSelect.closest(".card");
+      if (card) {
+        const attendingWeddingSelect = card.querySelector("select[name$='[attendingWedding]']");
+        const attendingGardenSelect = card.querySelector("select[name$='[attendingGarden]']");
+        
+        // Meal is required if guest is attending wedding day
+        const attendingWedding = attendingWeddingSelect ? String(attendingWeddingSelect.value || "").trim() : "";
+        console.log("Meal validation:", { attendingWedding, mealValue: mealSelect.value });
+        if (attendingWedding === "yes" && !String(mealSelect.value || "").trim()) {
+          hasError = true;
+          messages.push("Please select a meal preference for each guest attending the wedding day.");
+        }
+      }
+    });
+
+    // Dietary requirements are optional, so we skip validation for them
+    // Notes are optional, so we skip validation for them
+
+    console.log("Validation state:", { hasError, messages });
 
     if (hasError) {
       event.preventDefault();
@@ -584,10 +665,10 @@ function setupRsvpSheetIntegration() {
   function showRsvpForm() {
     summaryRoot.style.display = "none";
     form.style.display = "";
-    if (submitBtn) submitBtn.disabled = false;
     form.querySelectorAll("input, select, textarea, button").forEach((el) => {
       el.disabled = false;
     });
+    updateSubmitButtonState();
     [statusEl, statusInlineEl].filter(Boolean).forEach((el) => {
       el.classList.remove("form__status--error");
       el.classList.remove("form__status--success");
@@ -614,6 +695,8 @@ function setupRsvpSheetIntegration() {
   }
 
   if (guestName) {
+    form.style.display = "none";
+
     [statusEl, statusInlineEl].filter(Boolean).forEach((el) => {
       el.classList.remove("form__status--success");
       el.classList.remove("form__status--error");
@@ -660,6 +743,17 @@ function setupRsvpSheetIntegration() {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    // Check if validation has already failed by looking for error status
+    const hasValidationError = [statusEl, statusInlineEl].some((el) => 
+      el && el.classList.contains("form__status--error")
+    );
+    
+    console.log("hasValidationError", hasValidationError);
+    if (hasValidationError) {
+      // Don't proceed with submission if validation failed
+      return;
+    }
+
     if (submitBtn) submitBtn.disabled = true;
     [statusEl, statusInlineEl].filter(Boolean).forEach((el) => {
       el.classList.remove("form__status--error");
@@ -681,6 +775,7 @@ function setupRsvpSheetIntegration() {
         const attendingWeddingSelect = card.querySelector("select[name$='[attendingWedding]']");
         const attendingGardenSelect = card.querySelector("select[name$='[attendingGarden]']");
         const mealSelect = card.querySelector("select[name$='[meal]']");
+        const coachSelectEl = card.querySelector("select[name$='[coach]']");
         const dietaryTextarea = card.querySelector("textarea[name$='[dietary]']");
 
         return {
@@ -689,6 +784,7 @@ function setupRsvpSheetIntegration() {
           attendingWedding: String(attendingWeddingSelect && attendingWeddingSelect.value ? attendingWeddingSelect.value : "").trim(),
           attendingGarden: String(attendingGardenSelect && attendingGardenSelect.value ? attendingGardenSelect.value : "").trim(),
           meal: String(mealSelect && mealSelect.value ? mealSelect.value : "").trim(),
+          coach: String(coachSelectEl && coachSelectEl.value ? coachSelectEl.value : "").trim(),
           dietary: String(dietaryTextarea && dietaryTextarea.value ? dietaryTextarea.value : "").trim(),
         };
       })
@@ -752,6 +848,7 @@ function showRsvpSummary(payload, form, summaryRoot, statusEl) {
           const attendingWedding = escapeHtml(g && g.attendingWedding ? g.attendingWedding : "");
           const attendingGarden = escapeHtml(g && g.attendingGarden ? g.attendingGarden : "");
           const meal = escapeHtml(g && g.meal ? g.meal : "");
+          const coach = escapeHtml(g && g.coach ? g.coach : "");
           const dietary = escapeHtml(g && g.dietary ? g.dietary : "");
 
           return `
@@ -759,10 +856,11 @@ function showRsvpSummary(payload, form, summaryRoot, statusEl) {
               <div class="card__body">
                 <h3 class="card__title" style="margin-top: 0;">${name}</h3>
                 <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Attending wedding day:</strong> ${attendingWedding}</p>
+                ${attendingWedding ? `<p><strong>Attending wedding day:</strong> ${attendingWedding}</p>` : ''}
                 <p><strong>Attending garden party:</strong> ${attendingGarden}</p>
-                <p><strong>Meal:</strong> ${meal}</p>
-                <p><strong>Dietary requirements:</strong> ${dietary}</p>
+                ${meal ? `<p><strong>Meal:</strong> ${meal}</p>` : ''}
+                ${coach ? `<p><strong>Coach service:</strong> ${coach}</p>` : ''}
+                ${dietary ? `<p><strong>Dietary requirements:</strong> ${dietary}</p>` : ''}
               </div>
             </div>
           `;
@@ -772,6 +870,11 @@ function showRsvpSummary(payload, form, summaryRoot, statusEl) {
   }
 
   summaryRoot.innerHTML = `
+    <div class="card" style="margin-top: 1rem;">
+      <div class="card__body">
+        <p style="color: #666; font-style: italic;">If anything in your RSVP is incorrect, please contact Fred or Flora to amend it.</p>
+      </div>
+    </div>
     ${guestDetailsHtml}
     <div class="card" style="margin-top: 1rem;">
       <div class="card__body">
@@ -802,6 +905,79 @@ function escapeHtml(value) {
 function isValidEmail(value) {
   // Simple and permissive email pattern.
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function updateSubmitButtonState() {
+  const form = document.getElementById("rsvp-form");
+  if (!form) return;
+  const submitBtn = form.querySelector("button[type='submit']");
+  if (!submitBtn) return;
+
+  const cards = Array.from(form.querySelectorAll("#rsvp-guest-attendance-rows .card"));
+
+  if (cards.length === 0) {
+    submitBtn.disabled = true;
+    const hintEl = document.getElementById("rsvp-submit-hint");
+    if (hintEl) {
+      hintEl.style.display = "";
+      hintEl.textContent = "Please complete all fields above to submit your RSVP.";
+    }
+    return;
+  }
+
+  let emailInvalid = false;
+  let dropdownsInvalid = false;
+
+  for (const card of cards) {
+    const emailInput = card.querySelector("input[data-rsvp-field='email']");
+    if (!emailInput || !emailInput.value.trim() || !isValidEmail(emailInput.value)) {
+      emailInvalid = true;
+    }
+
+    const gardenSelect = card.querySelector("select[data-rsvp-field='attendingGarden']");
+    if (!gardenSelect || !gardenSelect.value) {
+      dropdownsInvalid = true;
+    }
+
+    const weddingGroup = card.querySelector("[data-rsvp-section='weddingAttendance']");
+    if (weddingGroup && weddingGroup.style.display !== "none") {
+      const weddingSelect = card.querySelector("select[data-rsvp-field='attendingWedding']");
+      if (!weddingSelect || !weddingSelect.value) {
+        dropdownsInvalid = true;
+      }
+    }
+
+    const mealGroup = card.querySelector("[data-rsvp-section='weddingMeal']");
+    if (mealGroup && mealGroup.style.display !== "none") {
+      const mealSelectEl = card.querySelector("select[data-rsvp-field='meal']");
+      if (!mealSelectEl || !mealSelectEl.value) {
+        dropdownsInvalid = true;
+      }
+    }
+
+    const coachGroupEl = card.querySelector("[data-rsvp-section='weddingCoach']");
+    if (coachGroupEl && coachGroupEl.style.display !== "none") {
+      const coachSelectEl = card.querySelector("select[data-rsvp-field='coach']");
+      if (!coachSelectEl || !coachSelectEl.value) {
+        dropdownsInvalid = true;
+      }
+    }
+  }
+
+  const allValid = !emailInvalid && !dropdownsInvalid;
+  submitBtn.disabled = !allValid;
+
+  const hintEl = document.getElementById("rsvp-submit-hint");
+  if (hintEl) {
+    if (allValid) {
+      hintEl.style.display = "none";
+    } else {
+      hintEl.style.display = "";
+      hintEl.textContent = emailInvalid && !dropdownsInvalid
+        ? "Please enter a valid email address to submit your RSVP."
+        : "Please complete all fields above to submit your RSVP.";
+    }
+  }
 }
 
 // Password protection and guest access control
@@ -951,7 +1127,19 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
   const dropdown = document.getElementById("guest-dropdown");
   const errorMsg = document.getElementById("guest-error");
   const flattenedGuests = flattenGuestList(guestList);
-  let filteredGuests = [...flattenedGuests];
+  
+  // Get the access level from the current auth session
+  const storedAuth = sessionStorage.getItem("wedding-auth");
+  const auth = storedAuth ? JSON.parse(storedAuth) : null;
+  const currentAccess = auth && auth.access ? String(auth.access).trim() : "both";
+  
+  // Filter guests by access level - only show guests with matching access
+  const guestsWithMatchingAccess = flattenedGuests.filter(guest => {
+    const guestAccess = guest && guest.access ? String(guest.access).trim() : "both";
+    return guestAccess === currentAccess;
+  });
+  
+  let filteredGuests = [...guestsWithMatchingAccess];
 
   function renderDropdown(guests) {
     if (guests.length === 0) {
@@ -981,9 +1169,9 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
   function filterGuests(query) {
     const q = query.toLowerCase().trim();
     if (q === "") {
-      filteredGuests = [...flattenedGuests];
+      filteredGuests = [...guestsWithMatchingAccess];
     } else {
-      filteredGuests = flattenedGuests.filter((guest) =>
+      filteredGuests = guestsWithMatchingAccess.filter((guest) =>
         guest.name.toLowerCase().includes(q)
       );
     }
