@@ -17,6 +17,46 @@ const rsvpSheetConfig = {
   webAppUrl: "https://script.google.com/macros/s/AKfycbzSjkHQRo4ZFk4BoxpXu-6zvDg_9LDnzc0hlfHXAHMraeFCesxN19m75GpBZGw6-a-x/exec",
 };
 
+const RSVP_CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
+function prefetchRsvpData(guestName) {
+  if (!guestName || !rsvpSheetConfig.webAppUrl) return;
+
+  const cacheKey = `wedding-rsvp:${guestName}`;
+  try {
+    const raw = localStorage.getItem(cacheKey);
+    if (raw) {
+      const cached = JSON.parse(raw);
+      if (cached && cached.cachedAt) {
+        const age = Date.now() - new Date(cached.cachedAt).getTime();
+        if (age < RSVP_CACHE_MAX_AGE_MS) return;
+      }
+    }
+  } catch (_) {
+    // ignore parse errors
+  }
+
+  const group = typeof guestList === "undefined" ? null : findGuestGroupByName(guestList, guestName);
+  const groupNames = Array.isArray(group)
+    ? group.map((g) => (g && g.name ? String(g.name).trim() : "")).filter((n) => n !== "")
+    : [];
+  const guestsParam = groupNames.length > 0 ? `&guests=${encodeURIComponent(groupNames.join("|"))}` : "";
+
+  fetch(`${rsvpSheetConfig.webAppUrl}?action=get&guest=${encodeURIComponent(guestName)}${guestsParam}`, { method: "GET" })
+    .then((res) => res.json().catch(() => null))
+    .then((payload) => {
+      if (!payload) return;
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify({ ...payload, cachedAt: new Date().toISOString() }));
+      } catch (_) {
+        // ignore storage errors
+      }
+    })
+    .catch(() => {
+      // Prefetch failed silently — the RSVP page will fetch again if needed
+    });
+}
+
 function flattenGuestList(list) {
   if (!Array.isArray(list)) return [];
   if (list.length === 0) return [];
@@ -657,9 +697,24 @@ function setupRsvpSheetIntegration() {
 
   const rsvpCacheKey = guestName ? `wedding-rsvp:${guestName}` : "";
 
+  function getCachedRsvp() {
+    if (!rsvpCacheKey) return null;
+    try {
+      const raw = localStorage.getItem(rsvpCacheKey);
+      return raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function isCacheFresh(payload) {
+    if (!payload || !payload.cachedAt) return false;
+    return (Date.now() - new Date(payload.cachedAt).getTime()) < RSVP_CACHE_MAX_AGE_MS;
+  }
+
   function clearCachedRsvp() {
     if (!rsvpCacheKey) return;
-    sessionStorage.removeItem(rsvpCacheKey);
+    localStorage.removeItem(rsvpCacheKey);
   }
 
   function showRsvpForm() {
@@ -684,24 +739,30 @@ function setupRsvpSheetIntegration() {
     });
   }
 
-  if (rsvpCacheKey) {
-    const cached = sessionStorage.getItem(rsvpCacheKey);
-    if (cached) {
-      const cachedPayload = JSON.parse(cached);
-      if (cachedPayload && cachedPayload.found) {
-        showRsvpSummarySafe(cachedPayload);
-      }
+  const cachedPayload = getCachedRsvp();
+  const cacheIsFresh = isCacheFresh(cachedPayload);
+
+  // Show cached data immediately — even if stale — so the user sees something at once.
+  if (cachedPayload) {
+    if (cachedPayload.found) {
+      showRsvpSummarySafe(cachedPayload);
+    } else {
+      showRsvpForm();
     }
   }
 
-  if (guestName) {
-    form.style.display = "none";
-
-    [statusEl, statusInlineEl].filter(Boolean).forEach((el) => {
-      el.classList.remove("form__status--success");
-      el.classList.remove("form__status--error");
-      el.textContent = "Checking your RSVP…";
-    });
+  // Only fetch if there is no cache or the cache is older than 24 hours.
+  if (guestName && !cacheIsFresh) {
+    // If nothing is cached yet, hide the form and show a loading message.
+    // If stale data is already displayed, refresh silently in the background.
+    if (!cachedPayload) {
+      form.style.display = "none";
+      [statusEl, statusInlineEl].filter(Boolean).forEach((el) => {
+        el.classList.remove("form__status--success");
+        el.classList.remove("form__status--error");
+        el.textContent = "Checking your RSVP…";
+      });
+    }
 
     const group = typeof guestList === "undefined" ? null : findGuestGroupByName(guestList, guestName);
     const groupNames = Array.isArray(group)
@@ -716,7 +777,7 @@ function setupRsvpSheetIntegration() {
       .then((payload) => {
         if (!payload) return;
         if (rsvpCacheKey) {
-          sessionStorage.setItem(rsvpCacheKey, JSON.stringify(payload));
+          localStorage.setItem(rsvpCacheKey, JSON.stringify({ ...payload, cachedAt: new Date().toISOString() }));
         }
         if (payload.found) {
           const notesEl = form.querySelector("#rsvp-notes");
@@ -728,15 +789,15 @@ function setupRsvpSheetIntegration() {
             applyRsvpDataToGuestSections(form, payload.data.rsvpGuests);
           }
           showRsvpSummarySafe(payload);
-        } else if (statusEl) {
-          // Server is authoritative: if it says there's no RSVP, clear any stale local cache
-          // and show the form.
+        } else {
+          // Server says no RSVP — clear stale cache and show the form.
           clearCachedRsvp();
           showRsvpForm();
         }
       })
       .catch(() => {
-        // If lookup fails, allow normal submission.
+        // Fetch failed — if nothing is displayed yet, fall back to showing the form.
+        if (!cachedPayload) showRsvpForm();
       });
   }
 
@@ -805,9 +866,9 @@ function setupRsvpSheetIntegration() {
           throw new Error("RSVP submission failed");
         }
         if (rsvpCacheKey) {
-          sessionStorage.setItem(
+          localStorage.setItem(
             rsvpCacheKey,
-            JSON.stringify({ found: true, data, ok: true, source: "server", updatedAt: new Date().toISOString() })
+            JSON.stringify({ found: true, data, ok: true, source: "server", cachedAt: new Date().toISOString() })
           );
         }
 
@@ -1001,7 +1062,7 @@ async function setupPasswordProtection() {
     if (!guestName || guestName.toLowerCase() === "site") {
       try {
         if (guestName) {
-          sessionStorage.removeItem(`wedding-rsvp:${guestName}`);
+          localStorage.removeItem(`wedding-rsvp:${guestName}`);
         }
       } catch (_) {
         // ignore
@@ -1010,6 +1071,7 @@ async function setupPasswordProtection() {
     } else if (guestName && access) {
       applyAccessLevel(auth.access);
       applyPageRestrictions(auth.access);
+      prefetchRsvpData(guestName);
       return Promise.resolve();
     }
   }
@@ -1210,6 +1272,9 @@ function selectGuest(guestName, access, modal, resolve) {
   applyAccessLevel(access);
   applyPageRestrictions(access);
 
+  // Pre-fetch RSVP data in the background so the RSVP page loads instantly
+  prefetchRsvpData(guestName);
+
   // Remove modal
   modal.remove();
 
@@ -1267,7 +1332,7 @@ function setupGuestSelector() {
         const parsed = stored ? JSON.parse(stored) : null;
         const guestName = parsed && parsed.guest ? String(parsed.guest).trim() : "";
         if (guestName) {
-          sessionStorage.removeItem(`wedding-rsvp:${guestName}`);
+          localStorage.removeItem(`wedding-rsvp:${guestName}`);
         }
       } catch (_) {
         // ignore
