@@ -9,7 +9,7 @@ const weddingConfig = {
 };
 
 const accessConfig = {
-  day2OnlyAllowedPages: ["garden-party.html", "rsvp.html", "registry.html", "faq-contact.html"],
+  day2OnlyAllowedPages: ["garden-party.html", "rsvp.html", "registry.html", "faq-contact-day2.html"],
   day2OnlyDefaultRedirect: "garden-party.html",
 };
 
@@ -400,16 +400,46 @@ function setupRsvpGuestAttendanceUI() {
   renderRows();
 }
 
+function updateFaqNavLinks(access) {
+  const targetHref = access === "day2" ? "faq-contact-day2.html" : "faq-contact-day1.html";
+  document.querySelectorAll("a[data-nav-faq], a[href*='faq-contact']").forEach((link) => {
+    link.setAttribute("href", targetHref);
+  });
+}
+
+function redirectFaqPageIfWrong(access) {
+  const currentPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
+  if (access === "day2" && currentPage === "faq-contact-day1.html") {
+    window.location.replace("faq-contact-day2.html");
+    return;
+  }
+  if (access === "day1" && currentPage === "faq-contact-day2.html") {
+    window.location.replace("faq-contact-day1.html");
+    return;
+  }
+}
+
 // Run navigation restrictions immediately when DOM is ready to prevent flicker
 document.addEventListener("DOMContentLoaded", () => {
-  // Check authentication and apply navigation restrictions immediately
   const storedAuth = sessionStorage.getItem("wedding-auth");
+  let access = "";
   if (storedAuth) {
-    const auth = JSON.parse(storedAuth);
-    const access = auth && auth.access ? String(auth.access).trim() : "";
-    if (access === "day2") {
-      restrictNavigationForDay2Only();
+    try {
+      const auth = JSON.parse(storedAuth);
+      access = auth && auth.access ? String(auth.access).trim() : "";
+    } catch (_) {
+      // ignore parse errors
     }
+  }
+
+  // Route FAQ links to day-specific page before nav restriction checks
+  updateFaqNavLinks(access);
+
+  // Redirect if guest landed on wrong day-specific FAQ page
+  redirectFaqPageIfWrong(access);
+
+  if (access === "day2") {
+    restrictNavigationForDay2Only();
   }
 
   // Continue with rest of setup
@@ -453,11 +483,24 @@ function setupNavToggle() {
 }
 
 function applyPageRestrictions(access) {
+  const currentPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
+
+  // Day 2 guest on day 1 FAQ -> redirect to day 2 FAQ
+  if (access === "day2" && currentPage === "faq-contact-day1.html") {
+    window.location.replace("faq-contact-day2.html");
+    return;
+  }
+
+  // Day 1 guest on day 2 FAQ -> redirect to day 1 FAQ
+  if (access === "day1" && currentPage === "faq-contact-day2.html") {
+    window.location.replace("faq-contact-day1.html");
+    return;
+  }
+
   if (access !== "day2") {
     return;
   }
 
-  const currentPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
   const allowed = accessConfig.day2OnlyAllowedPages.map((p) => p.toLowerCase());
 
   if (!allowed.includes(currentPage)) {

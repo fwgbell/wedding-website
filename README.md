@@ -16,7 +16,8 @@ All pages live in the root folder so they work nicely with GitHub Pages:
 - `travel-stay.html`: Travel info, accommodation options, and local recommendations.
 - `rsvp.html`: RSVP form that can submit directly to a Google Form / Sheet.
 - `registry.html`: Links to your registry sites or honeymoon/charity funds.
-- `faq-contact.html`: Frequently asked questions and a simple contact section.
+- `faq-contact-day1.html`: FAQ & contact for wedding day (day 1) guests.
+- `faq-contact-day2.html`: FAQ & contact for garden party (day 2) guests.
 
 Shared assets:
 
@@ -228,7 +229,7 @@ All links and assets in this template use **relative paths** (for example, `asse
 ## Where to add your own photos and text
 
 - Replace the hero background/photo on `index.html` by editing the `.hero__image` styling or putting an `<img>` inside it.
-- In each page (`details.html`, `travel-stay.html`, `faq-contact.html`), look for elements with the class `image-placeholder` and comments explaining what to put there.
+- In each page (`details.html`, `travel-stay.html`, `faq-contact-day1.html`, `faq-contact-day2.html`), look for elements with the class `image-placeholder` and comments explaining what to put there.
 - Replace placeholder paragraphs and headings everywhere with your own story, names, venues, dates, and notes.
 
 Take your time customizing; you can always preview by opening `index.html` in your browser after each change.
