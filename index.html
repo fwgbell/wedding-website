@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Frederick &amp; Flora · Wedding</title>
     <link rel="stylesheet" href="assets/css/main.css" />
+    <script src="assets/js/intro.js"></script>
   </head>
-  <body>
-    <header class="site-header">
+  <body class="home">
+    <header class="site-header site-header--transparent">
       <div class="container site-header__inner">
         <a href="index.html" class="site-header__brand">
           <span class="site-header__names">Frederick &amp; Flora</span>
@@ -33,17 +34,21 @@
 
     <main>
       <section class="hero">
-        <div class="hero__image">
-          <!-- Replace this with your own photo in assets/img/hero.jpg -->
-        </div>
-        <div class="container hero__content">
-          <p class="hero__eyebrow">We are getting married!!</p>
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="hero__eyebrow">We are getting married!</p>
           <h1 class="hero__title">Frederick &amp; Flora</h1>
-          <p class="hero__subtitle">19 September 2026 · 1:00pm · The Grange, Hampshire</p>
-          <a href="rsvp.html" class="btn btn--primary">RSVP</a>
+          <p class="hero__subtitle">19 September 2026 · 1:00 pm<br>The Grange, Hampshire</p>
+          <!-- <a href="rsvp.html" class="btn btn--hero">RSVP</a> -->
         </div>
+        <a href="#continue" class="hero__scroll-hint" aria-hidden="true">
+          <span>Scroll</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
       </section>
 
+      <div class="home-content" id="continue">
       <section class="section section--light">
         <div class="container">
           <header class="section__header">
@@ -138,6 +143,7 @@
           </article>
         </div>
       </section>
+      </div>
     </main>
 
     <footer class="site-footer">
@@ -148,6 +154,17 @@
       </div>
     </footer>
 
+    <script>
+    (function () {
+      var h = document.querySelector('.site-header--transparent');
+      if (!h) return;
+      var onScroll = function () {
+        h.classList.toggle('is-scrolled', window.scrollY > 60);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+    </script>
     <script src="assets/js/guest-list.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
