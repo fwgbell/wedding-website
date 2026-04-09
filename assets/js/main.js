@@ -315,7 +315,7 @@ function setupRsvpGuestAttendanceUI() {
       coachHint.className = "form__hint";
       coachHint.style.marginTop = "0";
       coachHint.style.marginBottom = "0.75rem";
-      coachHint.textContent = "We are considering booking a coach from the centre of Winchester to the ceremony on the morning of the wedding, and a return coach from the reception back to Winchester at midnight. Let us know if you'd be interested so we can gauge numbers.";
+      coachHint.textContent = "We are booking a coach from the centre of Winchester to the ceremony on the morning of the wedding, and a return coach from the reception back to Winchester at midnight. Let us know if you'd be interested so we can gauge numbers.";
       const coachLabel = document.createElement("label");
       coachLabel.textContent = "Interested in the coach service?";
       const coachSelect = document.createElement("select");
