@@ -1289,3 +1289,44 @@ body.modal-open {
   z-index: 1;
 }
 
+.intro-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.intro-loader--delayed {
+  opacity: 0;
+}
+
+.intro-loader--hidden {
+  opacity: 0;
+}
+
+.intro-loader__svg {
+  width: 100px;
+  height: 100px;
+}
+
+.intro-loader__track {
+  fill: none;
+  stroke: #e8d0bc;
+  stroke-width: 4;
+}
+
+.intro-loader__progress {
+  fill: none;
+  stroke: #c88a5b;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
