@@ -660,6 +660,9 @@ a:focus {
 }
 
 @media (min-width: 768px) {
+  .card-list--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .card-list--three {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
