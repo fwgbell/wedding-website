@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happily Ever After Garden Party · Frederick &amp; Flora</title>
+    <title>Happily Ever After Garden Party &middot; Frederick &amp; Flora</title>
     <link rel="stylesheet" href="assets/css/main.css" />
     <script src="assets/js/intro.js"></script>
   </head>
@@ -12,7 +12,7 @@
       <div class="container site-header__inner">
         <a href="index.html" class="site-header__brand">
           <span class="site-header__names">Frederick &amp; Flora</span>
-          <span class="site-header__date">Wedding · 19 September 2026</span>
+          <span class="site-header__date">Wedding &middot; 19 September 2026</span>
         </a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
           <span class="nav-toggle__line"></span>
@@ -34,7 +34,7 @@
 
     <main data-day="2">
       <section class="page-hero">
-        <div class="container">
+        <div class="container reveal">
           <h1 class="page-hero__title">Happily Ever After Garden Party</h1>
           <p class="page-hero__lead">
             Join us for a relaxed second-day celebration.
@@ -43,24 +43,21 @@
       </section>
 
       <section class="section section--light">
-        <div class="container section__grid-two">
+        <div class="container section__grid-two reveal">
           <article>
             <h2>When</h2>
             <p class="muted">
-              <!-- Replace with your garden party date/time -->
-              Sunday, 20 September 2026 · Midday
+              Sunday, 20 September 2026 &middot; Midday
             </p>
             <h2 style="margin-top: 2rem;">Where</h2>
             <p>
-              <!-- Replace with your garden party location -->
-              Venue Name<br />
-              Street address line 1<br />
-              City, State/Region, Country
+              Denbigh<br />
+              Shepherds Lane, Compton<br />
+              Winchester, SO21 2AD
             </p>
             <p>
-              <!-- Replace with your garden party description -->
-              We’d love you to join us for a casual afternoon in the garden—drop in for
-              drinks, bites, and a chance to catch up.
+              The day after the wedding, we would love to welcome you to Flora's family home for a relaxed afternoon in the garden. Join us for chilled drinks, a delicious open-fire buffet lunch
+               and plenty of time to unwind and enjoy the celebration together.
             </p>
           </article>
 
@@ -74,50 +71,64 @@
 
       <section class="section">
         <div class="container">
-          <h2>What to expect</h2>
-          <div class="card-list card-list--three">
+          <h2 class="reveal">Schedule</h2>
+          <ul class="schedule reveal reveal-delay-1">
+            <li class="schedule__item">
+              <span class="schedule__time">12:00 PM</span>
+              <span class="schedule__event">Arrival</span>
+            </li>
+            <li class="schedule__item">
+              <span class="schedule__time">1:00 PM</span>
+              <span class="schedule__event">Lunch is served</span>
+            </li>
+            <li class="schedule__item">
+              <span class="schedule__time">2:30 PM</span>
+              <span class="schedule__event">The cutting of our cake!</span>
+            </li>
+            <li class="schedule__item">
+              <span class="schedule__time">4:30 PM</span>
+              <span class="schedule__event">Afternoon continues / goodbye hugs</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section--light">
+        <div class="container">
+          <h2 class="reveal">What to expect</h2>
+          <div class="card-list card-list--three reveal reveal-delay-1">
             <article class="card">
               <h3 class="card__title">Food &amp; drink</h3>
               <p class="card__body">
-                <!-- Replace with your catering details -->
-                Light lunch / snacks and drinks (details coming soon).
+                Beautifully prepared dishes served fresh from the flames, as well as all you can eat pancakes for dessert!!
+                Wash it down with some refreshing drinks and enjoy the sunshine in the garden.
               </p>
             </article>
             <article class="card">
               <h3 class="card__title">Dress code</h3>
               <p class="card__body">
-                <!-- Replace with your dress code -->
-                Garden party casual. Please bring a layer if it’s breezy.
+                Smart casual garden party attire. Please bring a layer if it's breezy, and note that the event will take place on grass, so appropriate footwear is recommended.
               </p>
             </article>
             <article class="card">
               <h3 class="card__title">Getting there</h3>
               <p class="card__body">
-                <!-- Replace with travel/parking notes -->
-                Parking / directions will be shared here.
+                See the <a href="#directions-map">map and directions below</a> for how to find us and where to park.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section section--light">
+      <section id="directions-map" class="section">
         <div class="container">
-          <h2>Schedule</h2>
-          <ul class="schedule">
-            <li class="schedule__item">
-              <span class="schedule__time">12:00 PM</span>
-              <span class="schedule__event">Arrival</span>
-            </li>
-            <li class="schedule__item">
-              <span class="schedule__time">12:30 PM</span>
-              <span class="schedule__event">Food &amp; drinks</span>
-            </li>
-            <li class="schedule__item">
-              <span class="schedule__time">3:00 PM</span>
-              <span class="schedule__event">Afternoon continues / goodbye hugs</span>
-            </li>
-          </ul>
+          <h2 class="reveal">Directions &amp; Parking</h2>
+          <p class="reveal reveal-delay-1" style="margin-bottom: 1.5rem;">
+            Follow Shepherds Lane until you are almost at the very end. You will pass Flora&rsquo;s family home on your left, marked in <strong style="color: #c0392b;">red</strong> on the map, please don&rsquo;t park here. Just before the lane ends, turn left down a track, highlighted in <strong style="color: #2980b9;">blue</strong>. Keep an eye out for groomsmen who will be on hand to guide you in. Park in the field at the end of the track, also marked in <strong style="color: #2980b9;">blue</strong>.
+          </p>
+          <div class="map-container reveal reveal-delay-2">
+            <img src="assets/images/denbigh-maps-annotated.jpg" alt="Annotated map showing directions to the garden party via Shepherds Lane" loading="lazy" style="width: 100%; display: block;" />
+          </div>
         </div>
       </section>
     </main>
