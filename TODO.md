@@ -6,5 +6,4 @@ TO DO:
 - test with Mates
 - get feed back from Julia
 - check wedding spreadsheet for additional to do's
-- adjust positioning of video
 
