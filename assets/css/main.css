@@ -227,6 +227,13 @@ a:focus {
   transition: color 0.35s ease;
 }
 
+/* Brand link wraps the name/date spans; keep anchor color in sync so hover
+   underline matches visible text (spans override color but decoration uses the <a>). */
+.site-header--transparent .site-header__brand {
+  color: #ffffff;
+  transition: color 0.35s ease;
+}
+
 .site-header--transparent .site-nav a {
   color: rgba(255, 255, 255, 0.85);
   transition: color 0.35s ease;
@@ -259,6 +266,11 @@ a:focus {
 .site-header--transparent.is-scrolled .site-header__date,
 .site-header--transparent:has(.site-nav.is-open) .site-header__date {
   color: #777777;
+}
+
+.site-header--transparent.is-scrolled .site-header__brand,
+.site-header--transparent:has(.site-nav.is-open) .site-header__brand {
+  color: #333333;
 }
 
 .site-header--transparent.is-scrolled .site-nav a,

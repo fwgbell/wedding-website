@@ -272,7 +272,7 @@ After that:
 
 ## 5) How “already RSVP’d” works
 
-- The website stores the current guest in session storage (`wedding-auth`).
+- The website stores the current guest in local storage (`wedding-auth`).
 - On `rsvp.html`, the site calls the web app endpoint with `action=get`.
 - If the script finds any row where `Guest` matches that guest name (case-insensitive), it returns `{ found: true }`.
 - The site then disables the form inputs and shows a message.

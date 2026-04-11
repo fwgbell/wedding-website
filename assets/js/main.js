@@ -421,7 +421,7 @@ function redirectFaqPageIfWrong(access) {
 
 // Run navigation restrictions immediately when DOM is ready to prevent flicker
 document.addEventListener("DOMContentLoaded", () => {
-  const storedAuth = sessionStorage.getItem("wedding-auth");
+  const storedAuth = localStorage.getItem("wedding-auth");
   let access = "";
   if (storedAuth) {
     try {
@@ -452,6 +452,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setupRsvpSheetIntegration();
     setupGuestSelector();
     setupRsvpGuestAttendanceUI();
+
+    if (document.body.classList.contains("home")) {
+      scheduleForceDocumentScrollTop();
+    }
   });
 });
 
@@ -751,7 +755,7 @@ function setupRsvpSheetIntegration() {
     return;
   }
 
-  const storedAuth = sessionStorage.getItem("wedding-auth");
+  const storedAuth = localStorage.getItem("wedding-auth");
   const auth = storedAuth ? JSON.parse(storedAuth) : null;
   const guestName = auth && auth.guest ? auth.guest : "";
 
@@ -1101,6 +1105,24 @@ function updateSubmitButtonState() {
 }
 
 // Password protection and guest access control
+// iOS Safari often leaves the window partially scrolled after a focused input inside
+// a fixed overlay and body overflow: hidden; reset scroll in several phases.
+function forceDocumentScrollTop() {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+function scheduleForceDocumentScrollTop() {
+  forceDocumentScrollTop();
+  requestAnimationFrame(function () {
+    forceDocumentScrollTop();
+    requestAnimationFrame(forceDocumentScrollTop);
+  });
+  setTimeout(forceDocumentScrollTop, 0);
+  setTimeout(forceDocumentScrollTop, 120);
+}
+
 async function setupPasswordProtection() {
   // Load guest list configuration
   if (typeof guestList === "undefined") {
@@ -1109,7 +1131,7 @@ async function setupPasswordProtection() {
   }
 
   // Check if already authenticated
-  const storedAuth = sessionStorage.getItem("wedding-auth");
+  const storedAuth = localStorage.getItem("wedding-auth");
   if (storedAuth) {
     const auth = JSON.parse(storedAuth);
     const guestName = auth && auth.guest ? String(auth.guest).trim() : "";
@@ -1126,7 +1148,7 @@ async function setupPasswordProtection() {
       } catch (_) {
         // ignore
       }
-      sessionStorage.removeItem("wedding-auth");
+      localStorage.removeItem("wedding-auth");
     } else if (guestName && access) {
       applyAccessLevel(auth.access);
       applyPageRestrictions(auth.access);
@@ -1179,7 +1201,7 @@ async function setupPasswordProtection() {
         return;
       }
 
-      sessionStorage.setItem(
+      localStorage.setItem(
         "wedding-auth",
         JSON.stringify({ guest: "Site", access: isDay2Only ? "day2" : "both" })
       );
@@ -1251,7 +1273,7 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
   const flattenedGuests = flattenGuestList(guestList);
   
   // Get the access level from the current auth session
-  const storedAuth = sessionStorage.getItem("wedding-auth");
+  const storedAuth = localStorage.getItem("wedding-auth");
   const auth = storedAuth ? JSON.parse(storedAuth) : null;
   const currentAccess = auth && auth.access ? String(auth.access).trim() : "both";
   
@@ -1331,7 +1353,7 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
 
 function selectGuest(guestName, access, modal, resolve) {
   // Store authentication
-  sessionStorage.setItem(
+  localStorage.setItem(
     "wedding-auth",
     JSON.stringify({ guest: guestName, access: access })
   );
@@ -1349,6 +1371,8 @@ function selectGuest(guestName, access, modal, resolve) {
 
   // Resolve promise to continue page setup
   resolve();
+
+  scheduleForceDocumentScrollTop();
 }
 
 function applyAccessLevel(access) {
@@ -1381,7 +1405,7 @@ function setupGuestSelector() {
   const reloginLink = document.getElementById("rsvp-relogin");
 
   // Get current guest from session
-  const storedAuth = sessionStorage.getItem("wedding-auth");
+  const storedAuth = localStorage.getItem("wedding-auth");
   const auth = storedAuth ? JSON.parse(storedAuth) : null;
   const sessionGuest = auth && auth.guest ? String(auth.guest).trim() : "";
 
@@ -1397,7 +1421,7 @@ function setupGuestSelector() {
     reloginLink.addEventListener("click", (e) => {
       e.preventDefault();
       try {
-        const stored = sessionStorage.getItem("wedding-auth");
+        const stored = localStorage.getItem("wedding-auth");
         const parsed = stored ? JSON.parse(stored) : null;
         const guestName = parsed && parsed.guest ? String(parsed.guest).trim() : "";
         if (guestName) {
@@ -1407,7 +1431,7 @@ function setupGuestSelector() {
         // ignore
       }
 
-      sessionStorage.removeItem("wedding-auth");
+      localStorage.removeItem("wedding-auth");
       window.location.reload();
     });
   }
