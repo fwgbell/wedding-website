@@ -747,8 +747,9 @@ a:focus {
 .carousel__slide img {
   width: 100%;
   aspect-ratio: 3 / 2;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  background-color: #f9f6f3;
 }
 
 .carousel__btn {
@@ -767,7 +768,7 @@ a:focus {
   font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -793,6 +794,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .carousel__btn {
+    display: flex;
     opacity: 0;
   }
 

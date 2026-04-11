@@ -1,5 +1,4 @@
 TO DO:
-- Add in wedding imagery - lots of pictures of us
 - Add in more animation and transitions 
 - setup gifting pages
 - fill out all detiails and FAQ

@@ -1459,7 +1459,7 @@ function setupGuestSelector() {
     var dots = dotsContainer.querySelectorAll(".carousel__dot");
     var currentIndex = 0;
     var autoplayTimer = null;
-    var autoplayDelay = 5000;
+    var autoplayDelay = 3500;
 
     function scrollToSlide(index) {
       if (index < 0) index = slides.length - 1;
