@@ -1579,3 +1579,9 @@ body.modal-open {
   }
 }
 
+.contact-email {
+  user-select: all;
+  font-weight: 600;
+  cursor: text;
+}
+

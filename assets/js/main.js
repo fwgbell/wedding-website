@@ -452,6 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupRsvpSheetIntegration();
     setupGuestSelector();
     setupRsvpGuestAttendanceUI();
+    populateContactEmails();
 
     if (document.body.classList.contains("home")) {
       scheduleForceDocumentScrollTop();
@@ -1102,6 +1103,31 @@ function updateSubmitButtonState() {
         : "Please complete all fields above to submit your RSVP.";
     }
   }
+}
+
+function populateContactEmails() {
+  var containers = document.querySelectorAll("[data-contact-emails]");
+  if (!containers.length) return;
+
+  var storedAuth = localStorage.getItem("wedding-auth");
+  if (!storedAuth) return;
+  try {
+    var auth = JSON.parse(storedAuth);
+    if (!auth || !auth.guest || auth.guest === "Site") return;
+  } catch (_) {
+    return;
+  }
+
+  var a = ["floraelisabeth94", "gmail", "com"];
+  var b = ["fwgbell", "gmail", "com"];
+  var e1 = a[0] + "@" + a[1] + "." + a[2];
+  var e2 = b[0] + "@" + b[1] + "." + b[2];
+
+  containers.forEach(function (el) {
+    el.innerHTML =
+      "<p>Flora: <span class='contact-email'>" + e1 + "</span></p>" +
+      "<p>Frederick: <span class='contact-email'>" + e2 + "</span></p>";
+  });
 }
 
 // Password protection and guest access control
