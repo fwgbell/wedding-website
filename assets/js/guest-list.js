@@ -8,11 +8,11 @@ const guestList = [
   
   // Example groups - REPLACE WITH YOUR ACTUAL GUEST LIST:
   [
-    { name: "John Smith", access: "both", password: "" },
-    { name: "Jane Smith", access: "both", password: "" },
+    { name: "Jon Hardman", access: "both", password: "" },
+    { name: "Tash Harley", access: "both", password: "" },
   ],
   [
-    { name: "Alice Johnson", access: "both", password: "" },
+    { name: "Julia Mitchell", access: "both", password: "" },
   ],
   [
     { name: "Bob Williams", access: "day2", password: "" },
