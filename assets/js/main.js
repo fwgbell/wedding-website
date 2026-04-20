@@ -1331,7 +1331,7 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
       option.addEventListener("click", () => {
         const guestName = option.dataset.guestName;
         const access = option.dataset.access || defaultAccess;
-        selectGuest(guestName, access, modal, resolve);
+        confirmGuestSelection(guestName, access, modal, resolve);
       });
     });
   }
@@ -1375,6 +1375,52 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
       dropdown.classList.remove("is-open");
     }
   });
+}
+
+function confirmGuestSelection(guestName, access, modal, resolve) {
+  const existing = document.querySelector(".guest-confirm-modal");
+  if (existing) existing.remove();
+
+  const confirmModal = document.createElement("div");
+  confirmModal.className = "guest-confirm-modal";
+  confirmModal.innerHTML = `
+    <div class="guest-confirm-modal__content">
+      <h2 class="guest-confirm-modal__title">Please confirm</h2>
+      <p class="guest-confirm-modal__text">
+        Is this you?
+      </p>
+      <p class="guest-confirm-modal__name">${guestName}</p>
+      <div class="guest-confirm-modal__actions">
+        <button type="button" class="btn guest-confirm-modal__back">
+          No, go back
+        </button>
+        <button type="button" class="btn btn--primary guest-confirm-modal__confirm">
+          Yes, that's me
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(confirmModal);
+
+  const backBtn = confirmModal.querySelector(".guest-confirm-modal__back");
+  const confirmBtn = confirmModal.querySelector(".guest-confirm-modal__confirm");
+
+  backBtn.addEventListener("click", () => {
+    confirmModal.remove();
+    const guestInput = modal.querySelector("#guest-select");
+    if (guestInput) {
+      guestInput.focus();
+      guestInput.select();
+    }
+  });
+
+  confirmBtn.addEventListener("click", () => {
+    confirmModal.remove();
+    selectGuest(guestName, access, modal, resolve);
+  });
+
+  confirmBtn.focus();
 }
 
 function selectGuest(guestName, access, modal, resolve) {
