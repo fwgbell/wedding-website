@@ -3,5 +3,5 @@ TO DO:
 
 - update guest list
 
-- get feed back from Julia
+- action feed back from Julia
 
