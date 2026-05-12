@@ -9,9 +9,34 @@ const weddingConfig = {
 };
 
 const accessConfig = {
-  day2OnlyAllowedPages: ["garden-party.html", "rsvp.html", "registry.html", "faq-contact-day2.html"],
-  day2OnlyDefaultRedirect: "garden-party.html",
+  // Clean-URL slugs (folder names). Home is the empty string.
+  day2OnlyAllowedPages: ["garden-party", "rsvp", "registry", "faq-contact-day2"],
+  day2OnlyDefaultRedirect: "/garden-party/",
 };
+
+// Returns the current page slug derived from the URL path. For clean URLs
+// like /details/ this is "details"; the home page returns "".
+function getCurrentPageSlug() {
+  const path = (window.location.pathname || "").toLowerCase().replace(/\/+$/, "");
+  if (path === "" || path === "/index" || path === "/index.html") return "";
+  const segments = path.split("/").filter(Boolean);
+  if (segments.length === 0) return "";
+  const last = segments[segments.length - 1];
+  // Strip .html suffix in case the visitor hit a legacy URL before redirect
+  return last.replace(/\.html$/, "");
+}
+
+// Normalizes an href to its slug so nav links written as either "/details/"
+// or "details.html" both compare equal to "details".
+function getHrefSlug(href) {
+  if (!href) return "";
+  const cleaned = String(href).toLowerCase().trim()
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "")
+    .replace(/\.html$/, "");
+  if (cleaned === "" || cleaned === "index") return "";
+  return cleaned;
+}
 
 const rsvpSheetConfig = {
   webAppUrl: "https://script.google.com/macros/s/AKfycbzSjkHQRo4ZFk4BoxpXu-6zvDg_9LDnzc0hlfHXAHMraeFCesxN19m75GpBZGw6-a-x/exec",
@@ -401,20 +426,20 @@ function setupRsvpGuestAttendanceUI() {
 }
 
 function updateFaqNavLinks(access) {
-  const targetHref = access === "day2" ? "faq-contact-day2.html" : "faq-contact-day1.html";
+  const targetHref = access === "day2" ? "/faq-contact-day2/" : "/faq-contact-day1/";
   document.querySelectorAll("a[data-nav-faq], a[href*='faq-contact']").forEach((link) => {
     link.setAttribute("href", targetHref);
   });
 }
 
 function redirectFaqPageIfWrong(access) {
-  const currentPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
-  if (access === "day2" && currentPage === "faq-contact-day1.html") {
-    window.location.replace("faq-contact-day2.html");
+  const currentPage = getCurrentPageSlug();
+  if (access === "day2" && currentPage === "faq-contact-day1") {
+    window.location.replace("/faq-contact-day2/");
     return;
   }
-  if (access === "day1" && currentPage === "faq-contact-day2.html") {
-    window.location.replace("faq-contact-day1.html");
+  if (access === "day1" && currentPage === "faq-contact-day2") {
+    window.location.replace("/faq-contact-day1/");
     return;
   }
 }
@@ -488,17 +513,17 @@ function setupNavToggle() {
 }
 
 function applyPageRestrictions(access) {
-  const currentPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
+  const currentPage = getCurrentPageSlug();
 
   // Day 2 guest on day 1 FAQ -> redirect to day 2 FAQ
-  if (access === "day2" && currentPage === "faq-contact-day1.html") {
-    window.location.replace("faq-contact-day2.html");
+  if (access === "day2" && currentPage === "faq-contact-day1") {
+    window.location.replace("/faq-contact-day2/");
     return;
   }
 
   // Day 1 guest on day 2 FAQ -> redirect to day 1 FAQ
-  if (access === "day1" && currentPage === "faq-contact-day2.html") {
-    window.location.replace("faq-contact-day1.html");
+  if (access === "day1" && currentPage === "faq-contact-day2") {
+    window.location.replace("/faq-contact-day1/");
     return;
   }
 
@@ -531,19 +556,19 @@ function restrictNavigationForDay2Only() {
     const link = item.querySelector("a[href]");
     if (!link) return;
 
-    const href = (link.getAttribute("href") || "").toLowerCase();
-    
+    const slug = getHrefSlug(link.getAttribute("href"));
+
     // Hide the entire nav item if it's not in the allowed pages
-    if (!allowed.includes(href)) {
+    if (!allowed.includes(slug)) {
       item.style.display = "none";
     }
   });
 
-  // Handle the site header brand link (index.html)
+  // Disable the site header brand link (the home link) for day 2 guests
   const brandLink = document.querySelector(".site-header__brand");
   if (brandLink) {
-    const href = (brandLink.getAttribute("href") || "").toLowerCase();
-    if (href === "index.html" || href === "") {
+    const slug = getHrefSlug(brandLink.getAttribute("href"));
+    if (slug === "") {
       brandLink.setAttribute("aria-disabled", "true");
       brandLink.style.pointerEvents = "none";
       brandLink.style.cursor = "default";

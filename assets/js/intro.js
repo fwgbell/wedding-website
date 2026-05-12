@@ -1,6 +1,17 @@
 (function () {
   var STORAGE_KEY = "intro-played";
   var params = new URLSearchParams(window.location.search);
+
+  // First-time visitors arriving at the home page (no intro played yet,
+  // and not already on the ?intro flow) get bounced to ?intro to trigger
+  // the envelope + drone-video intro.
+  var path = window.location.pathname.replace(/\/+$/, "");
+  var isHome = path === "" || path === "/index" || path === "/index.html";
+  if (isHome && !params.has("intro") && !localStorage.getItem(STORAGE_KEY)) {
+    window.location.replace("/?intro" + window.location.hash);
+    return;
+  }
+
   if (!params.has("intro")) return;
   if (localStorage.getItem(STORAGE_KEY)) return;
 
