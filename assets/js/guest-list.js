@@ -10,8 +10,8 @@ const guestList = [
     { name: "Flora Thomas", access: "both", password: "" },
   ],
   [
-    { name: "Susie Millward", access: "both", password: "" },
-    { name: "Jem Millward", access: "both", password: "" },
+    { name: "Susan Millward", access: "both", password: "" },
+    { name: "Jeremy Millward", access: "both", password: "" },
   ],
   [
     { name: "Hector Bell", access: "both", password: "" },
@@ -22,7 +22,7 @@ const guestList = [
     { name: "Jatin Singh Dhillon", access: "both", password: "" },
   ],
   [
-    { name: "Jimmy Carroll", access: "both", password: "" },
+    { name: "James Carroll", access: "both", password: "" },
     { name: "Steffi Carroll", access: "both", password: "" },
   ],
   [
@@ -31,7 +31,7 @@ const guestList = [
   ],
   [
     { name: "Poppy Curran-Whitburn", access: "both", password: "" },
-    { name: "Matt Curran-Whitburn", access: "both", password: "" },
+    { name: "Matthew Curran-Whitburn", access: "both", password: "" },
   ],
   [
     { name: "Ben Ryall", access: "day2", password: "" },
@@ -42,8 +42,8 @@ const guestList = [
     { name: "Evie Ryall", access: "both", password: "" },
   ],
   [
-    { name: "Uncle Ian", access: "both", password: "" },
-    { name: "Auntie Dympna", access: "both", password: "" },
+    { name: "Ian Bell", access: "both", password: "" },
+    { name: "Dympna Bell", access: "both", password: "" },
   ],
   [
     { name: "Sinead Clegg", access: "both", password: "" },
@@ -54,10 +54,10 @@ const guestList = [
     { name: "Danny Keough", access: "both", password: "" },
   ],
   [
-    { name: "Auntie Pam", access: "both", password: "" },
+    { name: "Pamela Hardman", access: "both", password: "" },
   ],
   [
-    { name: "Uncle Russel", access: "both", password: "" },
+    { name: "Russel Crombie", access: "both", password: "" },
   ],
   [
     { name: "Auntie Jane", access: "day2", password: "" },
@@ -76,7 +76,7 @@ const guestList = [
     { name: "Mungo Chambers", access: "both", password: "" },
   ],
   [
-    { name: "Cal Richards", access: "day2", password: "" },
+    { name: "Callum Richards", access: "day2", password: "" },
   ],
   [
     { name: "Julia Mitchell", access: "both", password: "" },
@@ -90,7 +90,7 @@ const guestList = [
     { name: "Siobahn Meaney", access: "both", password: "" },
   ],
   [
-    { name: "Tim Drummond Smith", access: "both", password: "" },
+    { name: "Timothy Drummond Smith", access: "both", password: "" },
   ],
   [
     { name: "Jack Daniel", access: "both", password: "" },
@@ -113,21 +113,21 @@ const guestList = [
     { name: "Peter Braidley", access: "day2", password: "" },
   ],
   [
-    { name: "Jon Hardman", access: "both", password: "" },
-    { name: "Tash Harley", access: "both", password: "" },
+    { name: "Jonathan Hardman", access: "both", password: "" },
+    { name: "Natasha Harley", access: "both", password: "" },
   ],
   [
     { name: "Sarah-Jayne Sealy", access: "both", password: "" },
   ],
   [
-    { name: "Matt Lawrence", access: "both", password: "" },
+    { name: "Matthew Lawrence", access: "both", password: "" },
   ],
   [
     { name: "Callum Jepps", access: "both", password: "" },
     { name: "Marianne Neri", access: "both", password: "" },
   ],
   [
-    { name: "Ben Crowe", access: "both", password: "" },
+    { name: "Benjamin Crowe", access: "both", password: "" },
     { name: "Michelle Crowe", access: "both", password: "" },
   ],
   [
@@ -139,11 +139,11 @@ const guestList = [
     { name: "Zoe Clegg", access: "both", password: "" },
   ],
   [
-    { name: "Toby Hanscomb", access: "both", password: "" },
-    { name: "Tash Ross", access: "both", password: "" },
+    { name: "Tobias Hanscomb", access: "both", password: "" },
+    { name: "Natasha Ross", access: "both", password: "" },
   ],
   [
-    { name: "Joe Aylward", access: "both", password: "" },
+    { name: "Joseph Aylward", access: "both", password: "" },
     { name: "Inês Rodrigues dos Santos", access: "both", password: "" },
   ],
   [
@@ -155,8 +155,8 @@ const guestList = [
     { name: "Susie Hunt", access: "both", password: "" },
   ],
   [
-    { name: "Tom Pugh", access: "both", password: "" },
-    { name: "Vic Pugh", access: "both", password: "" },
+    { name: "Thomas Pugh", access: "both", password: "" },
+    { name: "Victoria Pugh", access: "both", password: "" },
   ],
   [
     { name: "Oscar von Claer", access: "both", password: "" },
@@ -169,13 +169,13 @@ const guestList = [
     { name: "Harry Stow", access: "both", password: "" },
   ],
   [
-    { name: "Ben Femiola", access: "both", password: "" },
+    { name: "Benjamin Femiola", access: "both", password: "" },
   ],
   [
     { name: "Haydn Read", access: "both", password: "" },
   ],
   [
-    { name: "Gin Laboviciute", access: "both", password: "" },
+    { name: "Gintare Laboviciute", access: "both", password: "" },
     { name: "Liam White", access: "both", password: "" },
   ],
   [
@@ -278,7 +278,7 @@ const guestList = [
     { name: "James Chisholm", access: "both", password: "" },
   ],
   [
-    { name: "Connie Freer-Smith", access: "both", password: "" },
+    { name: "Constance Freer-Smith", access: "both", password: "" },
     { name: "Robin Mackworth-Young", access: "both", password: "" },
   ],
   [
@@ -286,7 +286,7 @@ const guestList = [
     { name: "Tristan", access: "both", password: "" },
   ],
   [
-    { name: "Immy Allner", access: "both", password: "" },
+    { name: "Imogen Allner", access: "both", password: "" },
     { name: "Jamie Allner", access: "both", password: "" },
   ],
   [
@@ -294,17 +294,17 @@ const guestList = [
   ],
   [
     { name: "Clara Austera", access: "both", password: "" },
-    { name: "Ollie Skan", access: "both", password: "" },
+    { name: "Oliver Skan", access: "both", password: "" },
   ],
   [
-    { name: "Clem Barrett", access: "both", password: "" },
+    { name: "Clemency Barrett", access: "both", password: "" },
     { name: "Harrison Fookes", access: "both", password: "" },
   ],
   [
-    { name: "Alex Miller", access: "both", password: "" },
+    { name: "Alexandra Miller", access: "both", password: "" },
   ],
   [
-    { name: "Joe Ryan", access: "both", password: "" },
+    { name: "Joseph Ryan", access: "both", password: "" },
   ],
   [
     { name: "Katie Beeton", access: "both", password: "" },
@@ -315,8 +315,8 @@ const guestList = [
     { name: "Freya", access: "both", password: "" },
   ],
   [
-    { name: "Wilf van Geest", access: "both", password: "" },
-    { name: "Alex (VG)", access: "both", password: "" },
+    { name: "Wilfrid van Geest", access: "both", password: "" },
+    { name: "Alexandra Dzurik", access: "both", password: "" },
   ],
   [
     { name: "Christine Connelly", access: "both", password: "" },
@@ -365,11 +365,11 @@ const guestList = [
     { name: "Hamed", access: "both", password: "" },
   ],
   [
-    { name: "Ebs Smallman", access: "both", password: "" },
-    { name: "Robbie Mavor", access: "both", password: "" },
+    { name: "Ebony Smallman", access: "both", password: "" },
+    { name: "Robert Mavor", access: "both", password: "" },
   ],
   [
-    { name: "Richard", access: "day2", password: "" },
+    { name: "Richard Evans", access: "day2", password: "" },
     { name: "Wayne", access: "day2", password: "" },
   ],
   [
@@ -383,7 +383,7 @@ const guestList = [
     { name: "Alice", access: "day2", password: "" },
   ],
   [
-    { name: "Dotty", access: "day2", password: "" },
+    { name: "Dorothy", access: "day2", password: "" },
   ],
   [
     { name: "Marilyn", access: "day2", password: "" },
@@ -412,8 +412,8 @@ const guestList = [
 
 // Site passwords - guests need one of these to access the site
 // Leave both empty to disable password protection
-const fullAccessPassword = "Grange";
-const day2AccessPassword = "Denbigh";
+const fullAccessPassword = "fandf26";
+const day2AccessPassword = "thebells";
 
 // Default access level if no password is set
 // Options: "both", "day1", "day2"

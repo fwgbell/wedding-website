@@ -1363,7 +1363,7 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
 
   function filterGuests(query) {
     const q = query.toLowerCase().trim();
-    if (q.length < 3) {
+    if (q.length < 2) {
       dropdown.classList.remove("is-open");
       return;
     }
@@ -1389,7 +1389,7 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
 
   guestSelectInput.addEventListener("focus", () => {
     const query = guestSelectInput.value.trim();
-    if (query.length >= 3 && filteredGuests.length > 0) {
+    if (query.length >= 2 && filteredGuests.length > 0) {
       dropdown.classList.add("is-open");
     }
   });

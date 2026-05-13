@@ -1,41 +1,41 @@
 # Guest List
 
-Susie Millward
-Jem Millward
+Susan Millward
+Jeremy Millward
 Hector Bell
 Neve Bell
 Lucy Carroll
 Jatin Singh Dhillon
-Jimmy Carroll
+James Carroll
 Steffi Carroll
 Jeremy Ryall
 Teresa Ryall
 Poppy Curran-Whitburn
-Matt Curran-Whitburn
+Matthew Curran-Whitburn
 Ben Ryall
 Phoebe Rodgers
 Max Ryall
 Evie Ryall
-Uncle Ian
-Auntie Dympna
+Ian Bell
+Dympna Bell
 Sinead Clegg
 Martin Clegg
 Serena Keough
 Danny Keough
-Auntie Pam
-Uncle Russel
+Pamela Hardman
+Russel Crombie
 Auntie Jane
 Jane Butcher
 John Butcher
 Maria Chambers
 Alistair Muir
 Mungo Chambers
-Cal Richards
+Callum Richards
 George Rawlins
 Margaret Rawlins
 Keelan McNulty
 Siobahn Meaney
-Tim Drummond Smith
+Tim Drummond
 Jack Daniel
 Chloë Cochran
 Daniel Carey
@@ -44,35 +44,35 @@ Eric Hillman
 Ruairi Hafferty Hay
 Xanthe Wignall
 Peter Braidley
-Jon Hardman
-Tash Harley
+Jonathan Hardman
+Natasha Harley
 Sarah-Jayne Sealy
-Matt Lawrence
+Matthew Lawrence
 Callum Jepps
 Marianne Neri
-Ben Crowe
+Benjamin Crowe
 Michelle Crowe
 Harry Johnston
 Molly McLeod
 Sam Talbot
 Zoe Clegg
-Toby Hanscomb
-Tash Ross
-Joe Aylward
+Tobias Hanscomb
+Natasha Ross
+Joseph Aylward
 Inês Rodrigues dos Santos
 Hugo Spink
 Nicole Spink
 Mark Coram James
 Susie Hunt
-Tom Pugh
-Vic Pugh
+Thomas Pugh
+Victoria Pugh
 Oscar von Claer
 Lucas Fabbri
 Lizzy Hammerton
 Harry Stow
-Ben Femiola
+Benjamin Femiola
 Haydn Read
-Gin Laboviciute
+Gintare Laboviciute
 Liam White
 Maggie Shreeve
 Rob Shreeve
@@ -121,25 +121,25 @@ Henry Berridge-Dunn
 Caitlin Berridge-Dunn
 Aysel Akhundova
 James Chisholm
-Connie Freer-Smith
+Constance Freer-Smith
 Robin Mackworth-Young
 Yasmin Siabi
 Tristan
-Immy Allner
+Imogen Allner
 Jamie Allner
 Alice Goodinge
 Clara Austera
-Ollie Skan
-Clem Barrett
+Oliver Skan
+Clemency Barrett
 Harrison Fookes
-Alex Miller
-Joe Ryan
+Alexandra Miller
+Joseph Ryan
 Katie Beeton
 Fernando
 George Isbister
 Freya
-Wilf van Geest
-Alex (VG)
+Wilfrid van Geest
+Alexandra Dzurik
 Christine Connelly
 Lisa Case
 Jeremy
@@ -162,15 +162,15 @@ Peter Clarke
 Karen Clarke
 Sahia
 Hamed
-Ebs Smallman
-Robbie Mavor
-Richard
+Ebony Smallman
+Robert Mavor
+Richard Evans
 Wayne
 Jacqui Bounsall-Hughes
 Vinnie Bounsall-Hughes
 Matilda
 Alice
-Dotty
+Dorothy
 Marilyn
 Alan
 Bev Bridgeman
