@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Frederick and Flora">
+  <rect width="64" height="64" rx="14" ry="14" fill="#c88a5b"/>
+  <path d="M32 16.5c-1.6-3.1-7-3.1-7 1.1 0 3.1 7 6.6 7 6.6s7-3.5 7-6.6c0-4.2-5.4-4.2-7-1.1z" fill="#f9f6f3"/>
+  <text x="32" y="50" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="400" font-size="30"
+        fill="#f9f6f3">F&amp;F</text>
+</svg>
