@@ -308,7 +308,7 @@ const guestList = [
   ],
   [
     { name: "Katie Beeton", access: "both", password: "" },
-    { name: "Fernando", access: "both", password: "" },
+    { name: "Fernando Garcia de No", access: "both", password: "" },
   ],
   [
     { name: "George Isbister", access: "both", password: "" },
