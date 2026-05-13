@@ -70,7 +70,7 @@ Oscar von Claer
 Lucas Fabbri
 Lizzy Hammerton
 Harry Stow
-Benjamin Femiola
+Ben Femiola
 Haydn Read
 Gintare Laboviciute
 Liam White

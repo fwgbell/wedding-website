@@ -169,7 +169,7 @@ const guestList = [
     { name: "Harry Stow", access: "both", password: "" },
   ],
   [
-    { name: "Benjamin Femiola", access: "both", password: "" },
+    { name: "Ben Femiola", access: "both", password: "" },
   ],
   [
     { name: "Haydn Read", access: "both", password: "" },
