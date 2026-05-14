@@ -7,7 +7,7 @@ Neve Bell
 Lucy Carroll
 Jatin Singh Dhillon
 James Carroll
-Steffi Carroll
+Stefania Carroll
 Jeremy Ryall
 Teresa Ryall
 Poppy Curran-Whitburn

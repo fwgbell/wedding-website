@@ -23,7 +23,7 @@ const guestList = [
   ],
   [
     { name: "James Carroll", access: "both", password: "" },
-    { name: "Steffi Carroll", access: "both", password: "" },
+    { name: "Stefania Carroll", access: "both", password: "" },
   ],
   [
     { name: "Jeremy Ryall", access: "both", password: "" },
