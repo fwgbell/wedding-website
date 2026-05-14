@@ -87,7 +87,7 @@ const guestList = [
   ],
   [
     { name: "Keelan McNulty", access: "both", password: "" },
-    { name: "Siobahn Meaney", access: "both", password: "" },
+    { name: "Siobhan Meaney", access: "both", password: "" },
   ],
   [
     { name: "Timothy Drummond Smith", access: "both", password: "" },
@@ -283,7 +283,7 @@ const guestList = [
   ],
   [
     { name: "Yasmin Siabi", access: "both", password: "" },
-    { name: "Tristan", access: "both", password: "" },
+    { name: "Tristan Clough", access: "both", password: "" },
   ],
   [
     { name: "Imogen Allner", access: "both", password: "" },
@@ -390,7 +390,7 @@ const guestList = [
     { name: "Alan", access: "day2", password: "" },
   ],
   [
-    { name: "Bev Bridgeman", access: "day2", password: "" },
+    { name: "Beverley Bridgeman", access: "day2", password: "" },
     { name: "Lee Bridgeman", access: "day2", password: "" },
   ],
   [

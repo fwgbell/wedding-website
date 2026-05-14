@@ -34,7 +34,7 @@ Callum Richards
 George Rawlins
 Margaret Rawlins
 Keelan McNulty
-Siobahn Meaney
+Siobhan Meaney
 Tim Drummond
 Jack Daniel
 Chloë Cochran
@@ -124,7 +124,7 @@ James Chisholm
 Constance Freer-Smith
 Robin Mackworth-Young
 Yasmin Siabi
-Tristan
+Tristan Clough
 Imogen Allner
 Jamie Allner
 Alice Goodinge
@@ -173,7 +173,7 @@ Alice
 Dorothy
 Marilyn
 Alan
-Bev Bridgeman
+Beverley Bridgeman
 Lee Bridgeman
 Pat Evans
 Pat Evans (+1)
