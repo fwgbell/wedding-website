@@ -158,19 +158,17 @@ Rob Kickham
 Viv Kickham
 Su Annesley
 Howard Annesley
-Peter Clarke
-Karen Clarke
 Sahia
 Hamed
 Ebony Smallman
 Robert Mavor
 Richard Evans
-Wayne
+Wayne Amiel
 Jacqui Bounsall-Hughes
 Vinnie Bounsall-Hughes
 Matilda
-Alice
-Dorothy
+Alice Bounsall Hughes
+Dorothy Bounsall Hughes
 Marilyn
 Alan
 Beverley Bridgeman
