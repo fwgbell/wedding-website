@@ -1280,7 +1280,7 @@ function createPasswordModal() {
     <div class="password-modal__content">
       <h2 class="password-modal__title">Welcome</h2>
       <p class="password-modal__text">
-        Please enter the password to access Frederick & Flora's wedding website.
+        Please enter the password to access Flora & Frederick's wedding website.
       </p>
       
       <div class="password-modal__group">
