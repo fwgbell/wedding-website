@@ -1026,9 +1026,9 @@ a:focus {
 
 .map-marquee {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 64px;
+  top: 75%;
+  left: 70%;
+  width: 70px;
   height: auto;
   transform: translate(-50%, -50%);
   pointer-events: none;
