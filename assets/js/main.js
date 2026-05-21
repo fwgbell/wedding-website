@@ -1328,9 +1328,12 @@ function setupGuestDropdown(guestSelectInput, modal, resolve) {
   const auth = storedAuth ? JSON.parse(storedAuth) : null;
   const currentAccess = auth && auth.access ? String(auth.access).trim() : "both";
   
-  // Filter guests by access level - only show guests with matching access
+  // Filter guests by access level - only show guests with matching access.
+  // Also exclude placeholder "+1" entries so they never appear as login suggestions.
   const guestsWithMatchingAccess = flattenedGuests.filter(guest => {
     const guestAccess = guest && guest.access ? String(guest.access).trim() : "both";
+    const guestName = guest && guest.name ? String(guest.name) : "";
+    if (guestName.includes("+1")) return false;
     return guestAccess === currentAccess;
   });
   

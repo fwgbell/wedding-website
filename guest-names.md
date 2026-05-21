@@ -24,7 +24,7 @@ Serena Keough
 Danny Keough
 Pamela Hardman
 Russel Crombie
-Auntie Jane
+Jane Sakai
 Jane Butcher
 John Butcher
 Maria Chambers
@@ -101,7 +101,7 @@ Rachel Thomas
 Emily Wellington
 Ben Wellington
 Susan Thomas
-Susan +1 (Peter)
+Peter Waller
 Paul Onslow-Cole
 Julia Onslow-Cole
 Tom Onslow-Cole
@@ -166,9 +166,9 @@ Richard Evans
 Wayne Amiel
 Jacqui Bounsall-Hughes
 Vinnie Bounsall-Hughes
-Matilda
-Alice Bounsall Hughes
-Dorothy Bounsall Hughes
+Matilda Bounsall-Hughes
+Alice Bounsall-Hughes
+Dorothy Bounsall-Hughes
 Marilyn
 Alan
 Beverley Bridgeman

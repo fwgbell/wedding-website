@@ -60,7 +60,7 @@ const guestList = [
     { name: "Russel Crombie", access: "both", password: "" },
   ],
   [
-    { name: "Auntie Jane", access: "day2", password: "" },
+    { name: "Jane Sakai", access: "day2", password: "" },
   ],
   [
     { name: "Jane Butcher", access: "both", password: "" },
@@ -236,7 +236,7 @@ const guestList = [
   ],
   [
     { name: "Susan Thomas", access: "both", password: "" },
-    { name: "Susan +1 (Peter)", access: "both", password: "" },
+    { name: "Peter Waller", access: "both", password: "" },
   ],
   [
     { name: "Paul Onslow-Cole", access: "both", password: "" },
@@ -373,13 +373,13 @@ const guestList = [
     { name: "Vinnie Bounsall-Hughes", access: "day2", password: "" },
   ],
   [
-    { name: "Matilda", access: "day2", password: "" },
+    { name: "Matilda Bounsall-Hughes", access: "day2", password: "" },
   ],
   [
-    { name: "Alice Bounsall Hughes", access: "day2", password: "" },
+    { name: "Alice Bounsall-Hughes", access: "day2", password: "" },
   ],
   [
-    { name: "Dorothy Bounsall Hughes", access: "day2", password: "" },
+    { name: "Dorothy Bounsall-Hughes", access: "day2", password: "" },
   ],
   [
     { name: "Marilyn", access: "day2", password: "" },
