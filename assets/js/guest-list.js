@@ -365,8 +365,8 @@ const guestList = [
     { name: "Robert Mavor", access: "both", password: "" },
   ],
   [
-    { name: "Richard Evans", access: "day2", password: "" },
-    { name: "Wayne Amiel", access: "day2", password: "" },
+    { name: "Richard Evans", access: "both", password: "" },
+    { name: "Wayne Amiel", access: "both", password: "" },
   ],
   [
     { name: "Jacqui Bounsall-Hughes", access: "day2", password: "" },
