@@ -57,7 +57,7 @@ const guestList = [
     { name: "Pamela Hardman", access: "both", password: "" },
   ],
   [
-    { name: "Russel Crombie", access: "both", password: "" },
+    { name: "Russell Crombie", access: "both", password: "" },
   ],
   [
     { name: "Jane Sakai", access: "day2", password: "" },
@@ -248,7 +248,7 @@ const guestList = [
   ],
   [
     { name: "Gemma Johnson", access: "both", password: "" },
-    { name: "Wanda", access: "both", password: "" },
+    { name: "Wanda Kerr", access: "both", password: "" },
   ],
   [
     { name: "Serena Pugh", access: "both", password: "" },
@@ -312,7 +312,7 @@ const guestList = [
   ],
   [
     { name: "George Isbister", access: "both", password: "" },
-    { name: "Freya", access: "both", password: "" },
+    { name: "Freya Morris", access: "both", password: "" },
   ],
   [
     { name: "Wilfrid van Geest", access: "both", password: "" },
@@ -323,7 +323,7 @@ const guestList = [
   ],
   [
     { name: "Lisa Case", access: "day2", password: "" },
-    { name: "Jeremy", access: "day2", password: "" },
+    { name: "Jeremy Lynn", access: "day2", password: "" },
   ],
   [
     { name: "Amanda Isbister", access: "both", password: "" },
@@ -357,8 +357,8 @@ const guestList = [
     { name: "Howard Annesley", access: "day2", password: "" },
   ],
   [
-    { name: "Sahia", access: "both", password: "" },
-    { name: "Hamed", access: "both", password: "" },
+    { name: "Sahia Ahmad", access: "both", password: "" },
+    { name: "Hamed Ahmed Kazim", access: "both", password: "" },
   ],
   [
     { name: "Ebony Smallman", access: "both", password: "" },
@@ -382,8 +382,8 @@ const guestList = [
     { name: "Dorothy Bounsall-Hughes", access: "day2", password: "" },
   ],
   [
-    { name: "Marilyn", access: "day2", password: "" },
-    { name: "Alan", access: "day2", password: "" },
+    { name: "Marilyn Bounsall", access: "day2", password: "" },
+    { name: "Alan McGowan", access: "day2", password: "" },
   ],
   [
     { name: "Beverley Bridgeman", access: "day2", password: "" },

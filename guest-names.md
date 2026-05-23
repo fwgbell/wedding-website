@@ -23,7 +23,7 @@ Martin Clegg
 Serena Keough
 Danny Keough
 Pamela Hardman
-Russel Crombie
+Russell Crombie
 Jane Sakai
 Jane Butcher
 John Butcher
@@ -107,7 +107,7 @@ Julia Onslow-Cole
 Tom Onslow-Cole
 Rebecca Onslow-Cole
 Gemma Johnson
-Wanda
+Wanda Kerr
 Serena Pugh
 Sienna Smallman
 Rory McDonald
@@ -137,12 +137,12 @@ Joseph Ryan
 Katie Beeton
 Fernando Garcia de No
 George Isbister
-Freya
+Freya Morris
 Wilfrid van Geest
 Alexandra Dzurik
 Christine Connelly
 Lisa Case
-Jeremy
+Jeremy Lynn
 Amanda Isbister
 Andrew Isbister
 Su Beeton
@@ -158,8 +158,8 @@ Rob Kickham
 Viv Kickham
 Su Annesley
 Howard Annesley
-Sahia
-Hamed
+Sahia Ahmad
+Hamed Ahmed Kazim
 Ebony Smallman
 Robert Mavor
 Richard Evans
@@ -169,8 +169,8 @@ Vinnie Bounsall-Hughes
 Matilda Bounsall-Hughes
 Alice Bounsall-Hughes
 Dorothy Bounsall-Hughes
-Marilyn
-Alan
+Marilyn Bounsall
+Alan McGowan
 Beverley Bridgeman
 Lee Bridgeman
 Pat Evans
