@@ -370,7 +370,7 @@ const guestList = [
   ],
   [
     { name: "Jacqui Bounsall-Hughes", access: "day2", password: "" },
-    { name: "Vinnie Bounsall-Hughes", access: "day2", password: "" },
+    { name: "Vin Bounsall-Hughes", access: "day2", password: "" },
   ],
   [
     { name: "Matilda Bounsall-Hughes", access: "day2", password: "" },

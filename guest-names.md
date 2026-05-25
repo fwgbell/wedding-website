@@ -165,7 +165,7 @@ Robert Mavor
 Richard Evans
 Wayne Amiel
 Jacqui Bounsall-Hughes
-Vinnie Bounsall-Hughes
+Vin Bounsall-Hughes
 Matilda Bounsall-Hughes
 Alice Bounsall-Hughes
 Dorothy Bounsall-Hughes
