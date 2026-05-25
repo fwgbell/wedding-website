@@ -1682,9 +1682,31 @@ body.modal-open {
   opacity: 0;
 }
 
+.intro-loader__ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .intro-loader__svg {
   width: 100px;
   height: 100px;
+}
+
+.intro-loader__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: #c88a5b;
+  white-space: nowrap;
 }
 
 .intro-loader__track {

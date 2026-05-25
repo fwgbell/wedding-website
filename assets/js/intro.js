@@ -72,12 +72,15 @@
       var el = document.createElement("div");
       el.className = "intro-loader";
       el.innerHTML =
-        '<svg class="intro-loader__svg" viewBox="0 0 100 100">' +
-          '<circle class="intro-loader__track" cx="50" cy="50" r="' + CIRCLE_R + '"/>' +
-          '<circle class="intro-loader__progress" cx="50" cy="50" r="' + CIRCLE_R + '"' +
-            ' stroke-dasharray="' + CIRCUMFERENCE + '"' +
-            ' stroke-dashoffset="' + CIRCUMFERENCE + '"/>' +
-        '</svg>';
+        '<div class="intro-loader__ring">' +
+          '<svg class="intro-loader__svg" viewBox="0 0 100 100">' +
+            '<circle class="intro-loader__track" cx="50" cy="50" r="' + CIRCLE_R + '"/>' +
+            '<circle class="intro-loader__progress" cx="50" cy="50" r="' + CIRCLE_R + '"' +
+              ' stroke-dasharray="' + CIRCUMFERENCE + '"' +
+              ' stroke-dashoffset="' + CIRCUMFERENCE + '"/>' +
+          '</svg>' +
+          '<span class="intro-loader__label">loading&hellip;</span>' +
+        '</div>';
       return el;
     }
 
