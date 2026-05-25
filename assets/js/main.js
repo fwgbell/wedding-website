@@ -297,6 +297,14 @@ function setupRsvpGuestAttendanceUI() {
 
       attendingGardenGroup.appendChild(attendingGardenLabel);
       attendingGardenGroup.appendChild(attendingGardenSelect);
+
+      const gardenChildrenHint = document.createElement("p");
+      gardenChildrenHint.className = "form__hint";
+      gardenChildrenHint.style.marginTop = "0.5rem";
+      gardenChildrenHint.style.display = "none";
+      gardenChildrenHint.textContent = "Please let us know in the notes below if you wish to bring any children to the garden party.";
+      attendingGardenGroup.appendChild(gardenChildrenHint);
+
       inner.appendChild(attendingGardenGroup);
 
       const mealGroup = document.createElement("div");
@@ -400,6 +408,9 @@ function setupRsvpGuestAttendanceUI() {
         if (!showCoach) {
           coachSelect.value = "";
         }
+
+        // Garden party children note: show when guest is attending the garden party.
+        gardenChildrenHint.style.display = attendingGarden === "yes" ? "" : "none";
 
         // Dietary requirements: relevant for anyone attending either day.
         const showDietary = attendingWedding === "yes" || attendingGarden === "yes";
