@@ -90,7 +90,7 @@ const guestList = [
     { name: "Siobhan Meaney", access: "both", password: "" },
   ],
   [
-    { name: "Timothy Drummond Smith", access: "both", password: "" },
+    { name: "Tim Drummond", access: "both", password: "" },
   ],
   [
     { name: "Jack Daniel", access: "both", password: "" },
@@ -353,7 +353,7 @@ const guestList = [
     { name: "Viv Kickham", access: "both", password: "" },
   ],
   [
-    { name: "Su Annesley", access: "day2", password: "" },
+    { name: "Sue Annesley", access: "day2", password: "" },
     { name: "Howard Annesley", access: "day2", password: "" },
   ],
   [
