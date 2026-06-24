@@ -64,7 +64,7 @@ Hugo Spink
 Nicole Spink
 Mark Coram James
 Susie Hunt
-Thomas Pugh
+Tom Pugh
 Victoria Pugh
 Oscar von Claer
 Lucas Fabbri

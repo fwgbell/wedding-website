@@ -34,8 +34,8 @@ const guestList = [
     { name: "Matthew Curran-Whitburn", access: "both", password: "" },
   ],
   [
-    { name: "Ben Ryall", access: "day2", password: "" },
-    { name: "Phoebe Rodgers", access: "day2", password: "" },
+    { name: "Ben Ryall", access: "both", password: "" },
+    { name: "Phoebe Rodgers", access: "both", password: "" },
   ],
   [
     { name: "Max Ryall", access: "both", password: "" },
@@ -155,7 +155,7 @@ const guestList = [
     { name: "Susie Hunt", access: "both", password: "" },
   ],
   [
-    { name: "Thomas Pugh", access: "both", password: "" },
+    { name: "Tom Pugh", access: "both", password: "" },
     { name: "Victoria Pugh", access: "both", password: "" },
   ],
   [
